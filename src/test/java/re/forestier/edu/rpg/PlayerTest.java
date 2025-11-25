@@ -1,10 +1,9 @@
-package re.forestier.edu;
+package re.forestier.edu.rpg;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import re.forestier.edu.rpg.player;
 
 import java.util.ArrayList;
 
@@ -179,6 +178,98 @@ public class PlayerTest {
             p.addMoney(50);
 
             assertEquals(200, p.money);
+        }
+    }
+
+    @Nested
+    class RetrieveLvl {
+        @Test
+        @DisplayName("retrieveLevel - niveau 1 avec XP = 0")
+        void testRetrieveLevelOne_XpZero() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            assertEquals(1, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 1 avec XP = 9")
+        void testRetrieveLevelOne_XpNine() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 9;
+
+            assertEquals(1, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 2 avec XP = 10")
+        void testRetrieveLevelTwo_XpTen() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 10;
+
+            assertEquals(2, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 2 avec XP = 26")
+        void testRetrieveLevelTwo_XpTwentySix() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 26;
+
+            assertEquals(2, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 3 avec XP = 27")
+        void testRetrieveLevelThree_XpTwentySeven() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 27;
+
+            assertEquals(3, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 3 avec XP = 56")
+        void testRetrieveLevelThree_XpFiftySix() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 56;
+
+            assertEquals(3, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 4 avec XP = 57")
+        void testRetrieveLevelFour_XpFiftySeven() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 57;
+
+            assertEquals(4, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 4 avec XP = 110")
+        void testRetrieveLevelFour_XpOneHundredTen() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 110;
+
+            assertEquals(4, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 5 avec XP = 111")
+        void testRetrieveLevelFive_XpOneHundredEleven() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 111;
+
+            assertEquals(5, p.retrieveLevel());
+        }
+
+        @Test
+        @DisplayName("retrieveLevel - niveau 5 avec XP très élevé")
+        void testRetrieveLevelFive_HighXp() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 10000;
+
+            assertEquals(5, p.retrieveLevel());
         }
     }
 }
