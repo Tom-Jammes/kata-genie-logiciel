@@ -99,6 +99,19 @@ public class UpdatePlayerTest {
         }
 
         @Test
+        @DisplayName("addXp - level up de plusieurs niveaux")
+        void testAddXpLevelUpManyLevels() {
+            archer.xp = 0;
+            assertEquals(1, archer.retrieveLevel());
+
+            boolean leveledUp = UpdatePlayer.addXp(archer, 111);
+
+            assertTrue(leveledUp);
+            assertEquals(111, archer.xp);
+            assertEquals(5, archer.retrieveLevel());
+        }
+
+        @Test
         @DisplayName("addXp - ajout d'un objet aléatoire lors du level up")
         void testAddXpAddsRandomObjectOnLevelUp() {
             archer.xp = 0;
