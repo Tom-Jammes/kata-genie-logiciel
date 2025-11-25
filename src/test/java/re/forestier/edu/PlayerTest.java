@@ -29,15 +29,40 @@ public class PlayerTest {
     @Nested
     class Constructor {
         @Test
-        @DisplayName("Creation of a new player")
-        void testPlayerName() {
-            player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, notEmptyInventory);
-            assertThat(p.playerName, is("Florian"));
-            assertThat(p.Avatar_name, is("Grognak le barbare"));
-            assertThat(p.getAvatarClass(), is("ADVENTURER"));
-            assertThat(p.money, is(100));
-            assertEquals(p.inventory,  notEmptyInventory);
+        @DisplayName("Constructeur avec classe ARCHER valide")
+        void testConstructorWithValidArcherClass() {
+            player p = new player("John", "Robin", "ARCHER", 100, notEmptyInventory);
+
+            assertNotNull(p);
+            assertEquals("John", p.playerName);
+            assertEquals("Robin", p.Avatar_name);
+            assertEquals("ARCHER", p.getAvatarClass());
+            assertEquals(100, p.money);
+            assertEquals(notEmptyInventory, p.inventory);
             assertNotNull(p.abilities);
+        }
+
+        @Test
+        @DisplayName("Constructeur avec classe ADVENTURER valide")
+        void testConstructorWithValidAdventurerClass() {
+            player p = new player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
+
+            assertNotNull(p);
+            assertEquals("Alice", p.playerName);
+            assertEquals("Lara", p.Avatar_name);
+            assertEquals("ADVENTURER", p.getAvatarClass());
+            assertEquals(200, p.money);
+        }
+
+        @Test
+        @DisplayName("Constructeur avec classe DWARF valide")
+        void testConstructorWithValidDwarfClass() {
+            player p = new player("Bob", "Gimli", "DWARF", 50, notEmptyInventory);
+
+            assertNotNull(p);
+            assertEquals("Bob", p.playerName);
+            assertEquals("Gimli", p.Avatar_name);
+            assertEquals("DWARF", p.getAvatarClass());
         }
 
         @Test
