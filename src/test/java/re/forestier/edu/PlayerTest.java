@@ -78,4 +78,82 @@ public class PlayerTest {
             assertEquals("Potion", p.inventory.get(1));
         }
     }
+
+    @Nested
+    class Money {
+        @Test
+        @DisplayName("removeMoney - retrait valide")
+        void testRemoveMoneyValid() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            p.removeMoney(50);
+
+            assertEquals(50, p.money);
+        }
+
+        @Test
+        @DisplayName("removeMoney - retrait total")
+        void testRemoveMoneyAll() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            p.removeMoney(100);
+
+            assertEquals(0, p.money);
+        }
+
+        @Test
+        @DisplayName("removeMoney - montant négatif provoque une exception")
+        void testRemoveMoneyNegativeResult() {
+            player p = new player("John", "Avatar", "ARCHER", 50, notEmptyInventory);
+
+            try {
+                p.removeMoney(100);
+            } catch (IllegalArgumentException e) {
+                assertEquals("Player can't have a negative money!", e.getMessage());
+                assertEquals(50, p.money); // L'argent ne doit pas avoir changé
+            }
+        }
+
+        @Test
+        @DisplayName("removeMoney - retrait de zéro")
+        void testRemoveMoneyZero() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            p.removeMoney(0);
+
+            assertEquals(100, p.money);
+        }
+
+        @Test
+        @DisplayName("addMoney - ajout valide")
+        void testAddMoneyValid() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            p.addMoney(50);
+
+            assertEquals(150, p.money);
+        }
+
+        @Test
+        @DisplayName("addMoney - ajout de zéro")
+        void testAddMoneyZero() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            p.addMoney(0);
+
+            assertEquals(100, p.money);
+        }
+
+        @Test
+        @DisplayName("addMoney - multiple ajouts successifs")
+        void testAddMoneyMultipleTimes() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            p.addMoney(25);
+            p.addMoney(25);
+            p.addMoney(50);
+
+            assertEquals(200, p.money);
+        }
+    }
 }
