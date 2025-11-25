@@ -132,6 +132,7 @@ public class PlayerTest {
 
             try {
                 p.removeMoney(100);
+                fail();
             } catch (IllegalArgumentException e) {
                 assertEquals("Player can't have a negative money!", e.getMessage());
                 assertEquals(50, p.money); // L'argent ne doit pas avoir changé
