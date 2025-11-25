@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id "jacoco"
-    id 'info.solidsoft.pitest' version '1.7.4'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 group = 're.forestier.edu'
@@ -21,6 +21,15 @@ dependencies {
     implementation("org.freemarker:freemarker:2.3.30")
 
 
+}
+
+pitest {
+    junit5PluginVersion = '1.2.1'
+    pitestVersion = '1.15.3'
+    targetClasses = ['re.forestier.edu.*']
+    targetTests = ['re.forestier.edu.*']
+    outputFormats = ['HTML', 'XML']
+    timestampedReports = false
 }
 
 test {
