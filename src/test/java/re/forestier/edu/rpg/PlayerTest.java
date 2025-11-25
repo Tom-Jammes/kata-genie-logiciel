@@ -272,4 +272,24 @@ public class PlayerTest {
             assertEquals(5, p.retrieveLevel());
         }
     }
+
+    @Nested
+    class GetXp {
+        @Test
+        @DisplayName("getXp retourne la valeur correcte")
+        void testGetXp() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            p.xp = 50;
+
+            assertEquals(50, p.getXp());
+        }
+
+        @Test
+        @DisplayName("getXp d'un nouveau joueur")
+        void testGetXpZero() {
+            player p = new player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+
+            assertEquals(0, p.getXp());
+        }
+    }
 }
