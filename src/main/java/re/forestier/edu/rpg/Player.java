@@ -8,13 +8,11 @@ import static re.forestier.edu.rpg.AvatarClass.fromString;
 public class Player {
 
     public String playerName;
-    public String Avatar_name;
+    public String avatarName;
     private final AvatarClass avatarClass;
 
     public Integer money;
-    private Float __real_money__;
 
-    public int level;
     public int healthpoints;
     public int currenthealthpoints;
     protected int xp;
@@ -22,14 +20,14 @@ public class Player {
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public Player(String playerName, String avatar_name, String avatarClassName, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
         this.avatarClass = fromString(avatarClassName);
         if (this.avatarClass == null) {
             return;
         }
 
         this.playerName = playerName;
-        Avatar_name = avatar_name;
+        this.avatarName = avatarName;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass.toString()).get(1);

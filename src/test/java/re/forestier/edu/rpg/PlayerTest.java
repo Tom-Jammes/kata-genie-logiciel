@@ -34,7 +34,7 @@ public class PlayerTest {
 
             assertNotNull(p);
             assertEquals("John", p.playerName);
-            assertEquals("Robin", p.Avatar_name);
+            assertEquals("Robin", p.avatarName);
             assertEquals("ARCHER", p.getAvatarClass());
             assertEquals(100, p.money);
             assertEquals(notEmptyInventory, p.inventory);
@@ -48,7 +48,7 @@ public class PlayerTest {
 
             assertNotNull(p);
             assertEquals("Alice", p.playerName);
-            assertEquals("Lara", p.Avatar_name);
+            assertEquals("Lara", p.avatarName);
             assertEquals("ADVENTURER", p.getAvatarClass());
             assertEquals(200, p.money);
         }
@@ -60,7 +60,7 @@ public class PlayerTest {
 
             assertNotNull(p);
             assertEquals("Bob", p.playerName);
-            assertEquals("Gimli", p.Avatar_name);
+            assertEquals("Gimli", p.avatarName);
             assertEquals("DWARF", p.getAvatarClass());
         }
 
@@ -69,7 +69,7 @@ public class PlayerTest {
         void mustNotCreateAPlayerWithAnInvalidAvatarClass() {
             Player p = new Player("Alice", "Alice the skeleton", "InvalidAvatarClass", 100, notEmptyInventory);
             assertNull(p.playerName);
-            assertNull(p.Avatar_name);
+            assertNull(p.avatarName);
             assertNull(p.getAvatarClass());
             assertNull(p.money);
         }
