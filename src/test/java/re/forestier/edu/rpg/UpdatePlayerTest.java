@@ -11,16 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdatePlayerTest {
 
-    private player archer;
-    private player adventurer;
-    private player dwarf;
+    private Player archer;
+    private Player adventurer;
+    private Player dwarf;
 
     @BeforeEach
     void setUp() {
         ArrayList<String> inventory = new ArrayList<>();
-        archer = new player("John", "Robin", "ARCHER", 100, inventory);
-        adventurer = new player("Alice", "Lara", "ADVENTURER", 100, inventory);
-        dwarf = new player("Bob", "Gimli", "DWARF", 100, inventory);
+        archer = new Player("John", "Robin", "ARCHER", 100, inventory);
+        adventurer = new Player("Alice", "Lara", "ADVENTURER", 100, inventory);
+        dwarf = new Player("Bob", "Gimli", "DWARF", 100, inventory);
     }
 
     @Nested
