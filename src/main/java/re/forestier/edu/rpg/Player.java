@@ -28,7 +28,7 @@ public class Player {
 
         this.playerName = playerName;
         this.avatarName = avatarName;
-        this.money = Integer.valueOf(money);
+        this.money = money;
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass.toString()).get(1);
     }
