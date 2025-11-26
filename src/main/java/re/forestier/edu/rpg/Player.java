@@ -44,9 +44,11 @@ public class Player {
 
         money -= amount;
     }
+
     public void addMoney(int amount) {
         money += amount;
     }
+
     public int retrieveLevel() {
         // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
         HashMap<Integer, Integer> levels = new HashMap<>();
