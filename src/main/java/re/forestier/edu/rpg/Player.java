@@ -3,11 +3,13 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static re.forestier.edu.rpg.AvatarClass.fromString;
+
 public class Player {
 
     public String playerName;
     public String Avatar_name;
-    private String AvatarClass;
+    private final AvatarClass avatarClass;
 
     public Integer money;
     private Float __real_money__;
@@ -20,21 +22,21 @@ public class Player {
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public Player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
-        if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
+    public Player(String playerName, String avatar_name, String avatarClassName, int money, ArrayList<String> inventory) {
+        this.avatarClass = fromString(avatarClassName);
+        if (this.avatarClass == null) {
             return;
         }
 
         this.playerName = playerName;
         Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass.toString()).get(1);
     }
 
     public String getAvatarClass () {
-        return AvatarClass;
+        return this.avatarClass == null ? null : this.avatarClass.toString();
     }
 
     public void removeMoney(int amount) throws IllegalArgumentException {
