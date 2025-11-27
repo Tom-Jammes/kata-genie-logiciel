@@ -7,6 +7,8 @@ import static re.forestier.edu.rpg.AvatarClass.fromString;
 
 public class Player {
 
+    private final int MAXIMUM_LEVEL = 5;
+
     public String playerName;
     public String avatarName;
     private final AvatarClass avatarClass;
@@ -50,24 +52,18 @@ public class Player {
     }
 
     public int retrieveLevel() {
-        // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
-        HashMap<Integer, Integer> levels = new HashMap<>();
-        levels.put(2,10); // 1*10 + ((2*0)/4)
-        levels.put(3,27); // 2*10 + ((3*10)/4)
-        levels.put(4,57); // 3*10 + ((4*27)/4)
-        levels.put(5,111); // 4*10 + ((5*57)/4)
-        //TODO : ajouter les prochains niveaux
 
-        if (xp < levels.get(2)) {
-            return 1;
+        return retrieveLevelFromXp(1,0);
+    }
+
+    private int retrieveLevelFromXp(int currentLvl, int xpForCurrentLvl) {
+
+        int xpNextLvl = currentLvl * 10 + (currentLvl+1)*xpForCurrentLvl/4; // Formule to calculate the xp needed for lvlUp
+
+        if (this.xp < xpNextLvl || currentLvl == MAXIMUM_LEVEL) {
+            return currentLvl;
         }
-        else if (xp < levels.get(3)) {return 2;
-        }
-        if (xp < levels.get(4)) {
-            return 3;
-        }
-        if (xp < levels.get(5)) return 4;
-        return 5;
+        return retrieveLevelFromXp(currentLvl+1, xpNextLvl);
     }
 
     public int getXp() {
