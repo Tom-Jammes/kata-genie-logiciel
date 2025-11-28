@@ -111,9 +111,7 @@ public class UpdatePlayer {
 
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(newLevel);
-            abilities.forEach((ability, level) -> {
-                player.abilities.put(ability, abilities.get(ability));
-            });
+            abilities.forEach((ability, level) -> player.abilities.put(ability, abilities.get(ability)));
             return true;
         }
         return false;
