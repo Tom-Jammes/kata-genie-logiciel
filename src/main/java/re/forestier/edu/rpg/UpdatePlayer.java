@@ -106,9 +106,8 @@ public class UpdatePlayer {
         if (newLevel != currentLevel) {
             // Player leveled-up!
             // Give a random object
-            ;
             Random random = new Random();
-            player.inventory.add(objectList[random.nextInt(objectList.length - 0) + 0]);
+            player.inventory.add(objectList[random.nextInt(objectList.length)]);
 
             // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(newLevel);
