@@ -128,38 +128,24 @@ public class UpdatePlayer {
         }
 
         if(player.currenthealthpoints < player.healthpoints/2) {
-            if(!player.getAvatarClass().equals("ADVENTURER")) {
-                if(player.getAvatarClass().equals("DWARF")) {
-                    if(player.inventory.contains("Holy Elixir")) {
-                        player.currenthealthpoints+=1;
-                    }
+            if(player.getAvatarClass().equals("DWARF")) {
+                if(player.inventory.contains("Holy Elixir")) {
                     player.currenthealthpoints+=1;
-                } else if(player.getAvatarClass().equals("ADVENTURER")) {
-                    player.currenthealthpoints+=2;
                 }
-
-
-                if(player.getAvatarClass().equals("ARCHER")) {
-                    player.currenthealthpoints+=1;
-                    if(player.inventory.contains("Magic Bow")) {
-                        player.currenthealthpoints+=player.currenthealthpoints/8-1;
-                    }
-                }
-            } else {
+                player.currenthealthpoints+=1;
+            } else if(player.getAvatarClass().equals("ADVENTURER")) {
                 player.currenthealthpoints+=2;
                 if(player.retrieveLevel() < 3) {
                     player.currenthealthpoints-=1;
                 }
-            }
-        } else if(player.currenthealthpoints >= player.healthpoints/2){
-            if(player.currenthealthpoints >= player.healthpoints) {
-                player.currenthealthpoints = player.healthpoints;
-                return;
+            } else if(player.getAvatarClass().equals("ARCHER")) {
+                player.currenthealthpoints+=1;
+                if(player.inventory.contains("Magic Bow")) {
+                    player.currenthealthpoints+=player.currenthealthpoints/8-1;
+                }
             }
         }
-
-
-        if(player.currenthealthpoints >= player.healthpoints) {
+        if(player.currenthealthpoints > player.healthpoints) {
             player.currenthealthpoints = player.healthpoints;
         }
     }
