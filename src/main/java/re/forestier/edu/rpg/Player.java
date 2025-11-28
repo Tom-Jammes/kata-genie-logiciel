@@ -1,9 +1,9 @@
 package re.forestier.edu.rpg;
 
+import re.forestier.edu.rpg.avatars.AvatarClass;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static re.forestier.edu.rpg.AvatarClass.fromString;
 
 public class Player {
 
@@ -23,7 +23,7 @@ public class Player {
     public ArrayList<String> inventory;
 
     public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
-        this.avatarClass = fromString(avatarClassName);
+        this.avatarClass = AvatarClass.fromString(avatarClassName);
         if (this.avatarClass == null) {
             return;
         }

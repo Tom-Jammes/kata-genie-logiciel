@@ -125,27 +125,9 @@ public class UpdatePlayer {
         }
 
         if(player.currenthealthpoints < player.healthpoints/2) {
-            switch (player.getAvatarClassObject()) {
-                case ARCHER:
-                    player.currenthealthpoints += 1;
-                    if(player.inventory.contains("Magic Bow")) {
-                        player.currenthealthpoints+=player.currenthealthpoints/8-1;
-                    }
-                    break;
-                case ADVENTURER:
-                    player.currenthealthpoints += 2;
-                    if(player.retrieveLevel() < 3) {
-                        player.currenthealthpoints-=1;
-                    }
-                    break;
-                case DWARF:
-                    player.currenthealthpoints += 1;
-                    if(player.inventory.contains("Holy Elixir")) {
-                        player.currenthealthpoints+=1;
-                    }
-                    break;
-            }
+            player.currenthealthpoints += player.getAvatarClassObject().calculateHealthRegeneration(player);
         }
+
         if(player.currenthealthpoints > player.healthpoints) {
             player.currenthealthpoints = player.healthpoints;
         }
