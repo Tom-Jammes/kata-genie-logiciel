@@ -1,6 +1,6 @@
 package re.forestier.edu.rpg;
 
-import re.forestier.edu.rpg.avatars.AvatarClass;
+import re.forestier.edu.rpg.avatarclasses.AvatarClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;

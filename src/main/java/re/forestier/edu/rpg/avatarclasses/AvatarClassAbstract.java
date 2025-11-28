@@ -1,4 +1,4 @@
-package re.forestier.edu.rpg.avatars;
+package re.forestier.edu.rpg.avatarclasses;
 
 import re.forestier.edu.rpg.Player;
 
