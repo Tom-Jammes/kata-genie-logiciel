@@ -3,17 +3,34 @@ package re.forestier.edu.rpg;
 public class Affichage {
 
     public static String afficherJoueur(Player player) {
-        final String[] finalString = {"Joueur " + player.avatarName + " joué par " + player.playerName};
-        finalString[0] += "\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";
-        finalString[0] += "\n\nCapacités :";
-        player.abilities.forEach((name, level) -> {
-            finalString[0] += "\n   " + name + " : " + level;
-        });
-        finalString[0] += "\n\nInventaire :";
-        player.inventory.forEach(item -> {
-            finalString[0] += "\n   " + item;
-        });
+        StringBuilder display = new StringBuilder();
 
-        return finalString[0];
+        /* Header */
+        display.append("Joueur ").append(player.avatarName)
+                .append(" joué par ").append(player.playerName);
+        display.append("\n");
+
+        /* Stats */
+        display.append("Niveau : ").append(player.retrieveLevel())
+                .append(" (XP totale : ").append(player.xp).append(")");
+        display.append("\n");
+
+        /* Capacities */
+        display.append("\n");
+        display.append("Capacités :");
+        player.abilities.forEach((name, level) -> {
+            display.append("\n").append("   ").append(name).append(" : ").append(level);
+        });
+        display.append("\n");
+
+        /* Inventory */
+        display.append("\n");
+        display.append("Inventaire :");
+        player.inventory.forEach((name) -> {
+            display.append("\n").append("   ").append(name);
+        });
+        display.append("\n");
+
+        return display.toString();
     }
 }
