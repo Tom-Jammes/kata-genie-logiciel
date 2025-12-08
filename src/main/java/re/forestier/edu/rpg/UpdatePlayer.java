@@ -104,17 +104,18 @@ public class UpdatePlayer {
         int newLevel = player.retrieveLevel();
 
         if (newLevel != currentLevel) {
-            // Player leveled-up!
-            // Give a random object
-            Random random = new Random();
-            player.inventory.add(objectList[random.nextInt(objectList.length)]);
-
-            // Add/upgrade abilities to player
-            HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(newLevel);
-            abilities.forEach((ability, level) -> player.abilities.put(ability, abilities.get(ability)));
+            levelUp(player);
             return true;
         }
         return false;
+    }
+
+    private static void levelUp(Player player) {
+        Random random = new Random();
+        player.inventory.add(objectList[random.nextInt(objectList.length)]);
+
+        HashMap<String, Integer> newAbilities = player.getAvatarClassObject().getAbilitiesByLevel(player.retrieveLevel());
+        newAbilities.forEach((ability, level) -> player.abilities.put(ability, newAbilities.get(ability)));
     }
 
     // majFinDeTour met à jour les points de vie
