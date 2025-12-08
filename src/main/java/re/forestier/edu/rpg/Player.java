@@ -32,7 +32,7 @@ public class Player {
         this.avatarName = avatarName;
         this.money = money;
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass.toString()).get(1);
+        this.abilities = this.avatarClass.getAbilitiesByLevel(1);
     }
 
     public String getAvatarClass () {
