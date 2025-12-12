@@ -25,7 +25,7 @@ public class UpdatePlayer {
         player.addObjectInventory(objectList[random.nextInt(objectList.length)]);
 
         HashMap<String, Integer> newAbilities = player.getAvatarClassObject().getAbilitiesByLevel(player.retrieveLevel());
-        newAbilities.forEach((ability, level) -> player.getAbilities().put(ability, newAbilities.get(ability)));
+        newAbilities.forEach((ability, level) -> player.getAbilities().put(ability, level));
     }
 
     // majFinDeTour met à jour les points de vie
