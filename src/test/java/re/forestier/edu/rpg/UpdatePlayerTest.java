@@ -167,133 +167,133 @@ public class UpdatePlayerTest {
     @Nested
     class UpdateEndOfRound {
         @Test
-        @DisplayName("majFinDeTour - joueur KO (HP = 0)")
-        void testMajFinDeTourPlayerKO() {
+        @DisplayName("UpdateEndOfRound - joueur KO (HP = 0)")
+        void testUpdateEndOfRoundPlayerKO() {
             archer.setMaxHP(100);
             archer.setCurrentHP(0);
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             // Le joueur reste à 0 HP
             assertEquals(0, archer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - ARCHER avec HP < 50% sans Magic Bow")
-        void testMajFinDeTourArcherLowHealthNoMagicBow() {
+        @DisplayName("UpdateEndOfRound - ARCHER avec HP < 50% sans Magic Bow")
+        void testUpdateEndOfRoundArcherLowHealthNoMagicBow() {
             archer.setMaxHP(100);
             archer.setCurrentHP(40);
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             assertEquals(41, archer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - ARCHER avec HP < 50% avec Magic Bow")
-        void testMajFinDeTourArcherLowHealthWithMagicBow() {
+        @DisplayName("UpdateEndOfRound - ARCHER avec HP < 50% avec Magic Bow")
+        void testUpdateEndOfRoundArcherLowHealthWithMagicBow() {
             archer.setMaxHP(100);
             archer.setCurrentHP(40);
             archer.addObjectInventory("Magic Bow");
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             // 40 + 1 = 41, puis 41 + (41/8 - 1) = 41 + 4 = 45
             assertEquals(45, archer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - DWARF avec HP < 50% sans Holy Elixir")
-        void testMajFinDeTourDwarfLowHealthNoElixir() {
+        @DisplayName("UpdateEndOfRound - DWARF avec HP < 50% sans Holy Elixir")
+        void testUpdateEndOfRoundDwarfLowHealthNoElixir() {
             dwarf.setMaxHP(100);
             dwarf.setCurrentHP(40);
 
-            UpdatePlayer.majFinDeTour(dwarf);
+            UpdatePlayer.updateEndOfRound(dwarf);
 
             assertEquals(41, dwarf.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - DWARF avec HP < 50% avec Holy Elixir")
-        void testMajFinDeTourDwarfLowHealthWithElixir() {
+        @DisplayName("UpdateEndOfRound - DWARF avec HP < 50% avec Holy Elixir")
+        void testUpdateEndOfRoundDwarfLowHealthWithElixir() {
             dwarf.setMaxHP(100);
             dwarf.setCurrentHP(40);
             dwarf.addObjectInventory("Holy Elixir");
 
-            UpdatePlayer.majFinDeTour(dwarf);
+            UpdatePlayer.updateEndOfRound(dwarf);
 
             // 40 + 1 (elixir) + 1 (dwarf) = 42
             assertEquals(42, dwarf.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau < 3")
-        void testMajFinDeTourAdventurerLowHealthLowLevel() {
+        @DisplayName("UpdateEndOfRound - ADVENTURER avec HP < 50% et niveau < 3")
+        void testUpdateEndOfRoundAdventurerLowHealthLowLevel() {
             adventurer.setMaxHP(100);
             adventurer.setCurrentHP(40);
             adventurer.setXp(0); // niveau 1
 
-            UpdatePlayer.majFinDeTour(adventurer);
+            UpdatePlayer.updateEndOfRound(adventurer);
 
             // 40 + 2 - 1 = 41
             assertEquals(41, adventurer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau >= 3")
-        void testMajFinDeTourAdventurerLowHealthHighLevel() {
+        @DisplayName("UpdateEndOfRound - ADVENTURER avec HP < 50% et niveau >= 3")
+        void testUpdateEndOfRoundAdventurerLowHealthHighLevel() {
             adventurer.setMaxHP(100);
             adventurer.setCurrentHP(40);
             adventurer.setXp(27); // niveau 3
 
-            UpdatePlayer.majFinDeTour(adventurer);
+            UpdatePlayer.updateEndOfRound(adventurer);
 
             // 40 + 2 = 42
             assertEquals(42, adventurer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - joueur avec HP >= 50% et < max")
-        void testMajFinDeTourPlayerHealthAboveHalf() {
+        @DisplayName("UpdateEndOfRound - joueur avec HP >= 50% et < max")
+        void testUpdateEndOfRoundPlayerHealthAboveHalf() {
             archer.setMaxHP(100);
             archer.setCurrentHP(60);
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             // Pas de changement dans cette condition
             assertEquals(60, archer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - joueur avec HP = max")
-        void testMajFinDeTourPlayerFullHealth() {
+        @DisplayName("UpdateEndOfRound - joueur avec HP = max")
+        void testUpdateEndOfRoundPlayerFullHealth() {
             archer.setMaxHP(100);
             archer.setCurrentHP(100);
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             assertEquals(100, archer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - ARCHER avec HP exactement à 50%")
-        void testMajFinDeTourArcherExactlyHalfHealth() {
+        @DisplayName("UpdateEndOfRound - ARCHER avec HP exactement à 50%")
+        void testUpdateEndOfRoundArcherExactlyHalfHealth() {
             archer.setMaxHP(100);
             archer.setCurrentHP(50);
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             // HP >= healthpoints/2, donc pas de soin
             assertEquals(50, archer.getCurrentHP());
         }
 
         @Test
-        @DisplayName("majFinDeTour - ARCHER avec HP juste en dessous de 50%")
-        void testMajFinDeTourArcherJustBelowHalfHealth() {
+        @DisplayName("UpdateEndOfRound - ARCHER avec HP juste en dessous de 50%")
+        void testUpdateEndOfRoundArcherJustBelowHalfHealth() {
             archer.setMaxHP(100);
             archer.setCurrentHP(49);
 
-            UpdatePlayer.majFinDeTour(archer);
+            UpdatePlayer.updateEndOfRound(archer);
 
             // HP < healthpoints/2, donc soin
             assertEquals(50, archer.getCurrentHP());

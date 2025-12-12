@@ -29,7 +29,7 @@ public class UpdatePlayer {
     }
 
     // majFinDeTour met à jour les points de vie
-    public static void majFinDeTour(Player player) {
+    public static void updateEndOfRound(Player player) {
         if(player.getCurrentHP() == 0) {
             System.out.println("Le joueur est KO !");
             return;
