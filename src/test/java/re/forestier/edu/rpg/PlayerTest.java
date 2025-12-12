@@ -33,12 +33,12 @@ public class PlayerTest {
             Player p = new Player("John", "Robin", "ARCHER", 100, notEmptyInventory);
 
             assertNotNull(p);
-            assertEquals("John", p.playerName);
-            assertEquals("Robin", p.avatarName);
+            assertEquals("John", p.getPlayerName());
+            assertEquals("Robin", p.getAvatarName());
             assertEquals("ARCHER", p.getAvatarClass());
-            assertEquals(100, p.money);
-            assertEquals(notEmptyInventory, p.inventory);
-            assertNotNull(p.abilities);
+            assertEquals(100, p.getMoney());
+            assertEquals(notEmptyInventory, p.getInventory());
+            assertNotNull(p.getAbilities());
         }
 
         @Test
@@ -47,10 +47,10 @@ public class PlayerTest {
             Player p = new Player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
 
             assertNotNull(p);
-            assertEquals("Alice", p.playerName);
-            assertEquals("Lara", p.avatarName);
+            assertEquals("Alice", p.getPlayerName());
+            assertEquals("Lara", p.getAvatarName());
             assertEquals("ADVENTURER", p.getAvatarClass());
-            assertEquals(200, p.money);
+            assertEquals(200, p.getMoney());
         }
 
         @Test
@@ -59,8 +59,8 @@ public class PlayerTest {
             Player p = new Player("Bob", "Gimli", "DWARF", 50, notEmptyInventory);
 
             assertNotNull(p);
-            assertEquals("Bob", p.playerName);
-            assertEquals("Gimli", p.avatarName);
+            assertEquals("Bob", p.getPlayerName());
+            assertEquals("Gimli", p.getAvatarName());
             assertEquals("DWARF", p.getAvatarClass());
         }
 
@@ -68,10 +68,10 @@ public class PlayerTest {
         @DisplayName("Impossible to create a player with an invalid avatarClass")
         void mustNotCreateAPlayerWithAnInvalidAvatarClass() {
             Player p = new Player("Alice", "Alice the skeleton", "InvalidAvatarClass", 100, notEmptyInventory);
-            assertNull(p.playerName);
-            assertNull(p.avatarName);
+            assertNull(p.getPlayerName());
+            assertNull(p.getAvatarName());
             assertNull(p.getAvatarClass());
-            assertNull(p.money);
+            assertNull(p.getMoney());
         }
 
         @Test
@@ -79,7 +79,7 @@ public class PlayerTest {
         void testConstructorWithZeroMoney() {
             Player p = new Player("Poor", "Avatar", "ARCHER", 0, notEmptyInventory);
 
-            assertEquals(0, p.money);
+            assertEquals(0, p.getMoney());
         }
 
         @Test
@@ -87,8 +87,8 @@ public class PlayerTest {
         void testConstructorWithEmptyInventory() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, emptyInventory);
 
-            assertNotNull(p.inventory);
-            assertEquals(0, p.inventory.size());
+            assertNotNull(p.getInventory());
+            assertEquals(0, p.getInventory().size());
         }
 
         @Test
@@ -96,10 +96,10 @@ public class PlayerTest {
         void testConstructorWithNotEmptyInventory() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
 
-            assertNotNull(p.inventory);
-            assertEquals(2, p.inventory.size());
-            assertEquals("Sword", p.inventory.get(0));
-            assertEquals("Potion", p.inventory.get(1));
+            assertNotNull(p.getInventory());
+            assertEquals(2, p.getInventory().size());
+            assertEquals("Sword", p.getInventory().get(0));
+            assertEquals("Potion", p.getInventory().get(1));
         }
     }
 
@@ -112,7 +112,7 @@ public class PlayerTest {
 
             p.removeMoney(50);
 
-            assertEquals(50, p.money);
+            assertEquals(50, p.getMoney());
         }
 
         @Test
@@ -122,7 +122,7 @@ public class PlayerTest {
 
             p.removeMoney(100);
 
-            assertEquals(0, p.money);
+            assertEquals(0, p.getMoney());
         }
 
         @Test
@@ -135,7 +135,7 @@ public class PlayerTest {
                 fail();
             } catch (IllegalArgumentException e) {
                 assertEquals("Player can't have a negative money!", e.getMessage());
-                assertEquals(50, p.money); // L'argent ne doit pas avoir changé
+                assertEquals(50, p.getMoney()); // L'argent ne doit pas avoir changé
             }
         }
 
@@ -146,7 +146,7 @@ public class PlayerTest {
 
             p.removeMoney(0);
 
-            assertEquals(100, p.money);
+            assertEquals(100, p.getMoney());
         }
 
         @Test
@@ -156,7 +156,7 @@ public class PlayerTest {
 
             p.addMoney(50);
 
-            assertEquals(150, p.money);
+            assertEquals(150, p.getMoney());
         }
 
         @Test
@@ -166,7 +166,7 @@ public class PlayerTest {
 
             p.addMoney(0);
 
-            assertEquals(100, p.money);
+            assertEquals(100, p.getMoney());
         }
 
         @Test
@@ -178,7 +178,7 @@ public class PlayerTest {
             p.addMoney(25);
             p.addMoney(50);
 
-            assertEquals(200, p.money);
+            assertEquals(200, p.getMoney());
         }
     }
 
@@ -196,7 +196,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 1 avec XP = 9")
         void testRetrieveLevelOne_XpNine() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 9;
+            p.setXp(9);
 
             assertEquals(1, p.retrieveLevel());
         }
@@ -205,7 +205,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 2 avec XP = 10")
         void testRetrieveLevelTwo_XpTen() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 10;
+            p.setXp(10);
 
             assertEquals(2, p.retrieveLevel());
         }
@@ -214,7 +214,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 2 avec XP = 26")
         void testRetrieveLevelTwo_XpTwentySix() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 26;
+            p.setXp(26);
 
             assertEquals(2, p.retrieveLevel());
         }
@@ -223,7 +223,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 3 avec XP = 27")
         void testRetrieveLevelThree_XpTwentySeven() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 27;
+            p.setXp(27);
 
             assertEquals(3, p.retrieveLevel());
         }
@@ -232,7 +232,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 3 avec XP = 56")
         void testRetrieveLevelThree_XpFiftySix() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 56;
+            p.setXp(56);
 
             assertEquals(3, p.retrieveLevel());
         }
@@ -241,7 +241,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 4 avec XP = 57")
         void testRetrieveLevelFour_XpFiftySeven() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 57;
+            p.setXp(57);
 
             assertEquals(4, p.retrieveLevel());
         }
@@ -250,7 +250,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 4 avec XP = 110")
         void testRetrieveLevelFour_XpOneHundredTen() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 110;
+            p.setXp(110);
 
             assertEquals(4, p.retrieveLevel());
         }
@@ -259,7 +259,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 5 avec XP = 111")
         void testRetrieveLevelFive_XpOneHundredEleven() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 111;
+            p.setXp(111);
 
             assertEquals(5, p.retrieveLevel());
         }
@@ -268,7 +268,7 @@ public class PlayerTest {
         @DisplayName("retrieveLevel - niveau 5 avec XP très élevé")
         void testRetrieveLevelFive_HighXp() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 10000;
+            p.setXp(10000);
 
             assertEquals(5, p.retrieveLevel());
         }
@@ -280,7 +280,7 @@ public class PlayerTest {
         @DisplayName("getXp retourne la valeur correcte")
         void testGetXp() {
             Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.xp = 50;
+            p.setXp(50);
 
             assertEquals(50, p.getXp());
         }

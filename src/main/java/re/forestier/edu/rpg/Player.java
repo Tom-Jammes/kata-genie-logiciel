@@ -9,18 +9,18 @@ public class Player {
 
     private final int MAXIMUM_LEVEL = 5;
 
-    public String playerName;
-    public String avatarName;
+    private String playerName;
+    private String avatarName;
     private final AvatarClass avatarClass;
 
-    public Integer money;
+    private Integer money;
 
-    public int healthpoints;
-    public int currenthealthpoints;
-    protected int xp;
+    private int healthpoints;
+    private int currenthealthpoints;
+    private int xp;
 
-    public HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
+    private HashMap<String, Integer> abilities;
+    private ArrayList<String> inventory;
 
     public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
         this.avatarClass = AvatarClass.fromString(avatarClassName);
@@ -72,5 +72,57 @@ public class Player {
 
     public int getXp() {
         return this.xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public void addXp(int xp) {
+        this.xp += xp;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public String getAvatarName() {
+        return avatarName;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public int getHealthpoints() {
+        return healthpoints;
+    }
+
+    public void setHealthpoints(int healthpoints) {
+        this.healthpoints = healthpoints;
+    }
+
+    public int getCurrenthealthpoints() {
+        return currenthealthpoints;
+    }
+
+    public void setCurrenthealthpoints(int currenthealthpoints) {
+        this.currenthealthpoints = currenthealthpoints;
+    }
+
+    public HashMap<String, Integer> getAbilities() {
+        return abilities;
+    }
+
+    public ArrayList<String> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(ArrayList<String> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void addObjectInventory(String objectName) {
+        this.inventory.add(objectName);
     }
 }

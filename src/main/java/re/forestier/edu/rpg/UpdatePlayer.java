@@ -10,7 +10,7 @@ public class UpdatePlayer {
 
     public static boolean addXp(Player player, int xp) {
         int currentLevel = player.retrieveLevel();
-        player.xp += xp;
+        player.addXp(xp);
         int newLevel = player.retrieveLevel();
 
         if (newLevel != currentLevel) {
@@ -22,25 +22,25 @@ public class UpdatePlayer {
 
     private static void levelUp(Player player) {
         Random random = new Random();
-        player.inventory.add(objectList[random.nextInt(objectList.length)]);
+        player.addObjectInventory(objectList[random.nextInt(objectList.length)]);
 
         HashMap<String, Integer> newAbilities = player.getAvatarClassObject().getAbilitiesByLevel(player.retrieveLevel());
-        newAbilities.forEach((ability, level) -> player.abilities.put(ability, newAbilities.get(ability)));
+        newAbilities.forEach((ability, level) -> player.getAbilities().put(ability, newAbilities.get(ability)));
     }
 
     // majFinDeTour met à jour les points de vie
     public static void majFinDeTour(Player player) {
-        if(player.currenthealthpoints == 0) {
+        if(player.getCurrenthealthpoints() == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
 
-        if(player.currenthealthpoints < player.healthpoints/2) {
-            player.currenthealthpoints += player.getAvatarClassObject().calculateHealthRegeneration(player);
+        if(player.getCurrenthealthpoints() < player.getHealthpoints()/2) {
+            player.setCurrenthealthpoints(player.getCurrenthealthpoints()+player.getAvatarClassObject().calculateHealthRegeneration(player));
         }
 
-        if(player.currenthealthpoints > player.healthpoints) {
-            player.currenthealthpoints = player.healthpoints;
+        if(player.getCurrenthealthpoints() > player.getHealthpoints()) {
+            player.setCurrenthealthpoints(player.getHealthpoints());
         }
     }
 }

@@ -31,13 +31,13 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("addXp - ajout d'XP sans changement de niveau")
         void testAddXpMultipleTimesWithoutLevelUp() {
-            archer.xp = 0;
+            archer.setXp(0);
 
             UpdatePlayer.addXp(archer, 2);
-            assertEquals(2, archer.xp);
+            assertEquals(2, archer.getXp());
 
             UpdatePlayer.addXp(archer, 3);
-            assertEquals(5, archer.xp);
+            assertEquals(5, archer.getXp());
 
             assertEquals(1, archer.retrieveLevel());
         }
@@ -45,85 +45,85 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("addXp - ajout de 0 XP")
         void testAddXpZero() {
-            archer.xp = 5;
+            archer.setXp(5);
 
             boolean leveledUp = UpdatePlayer.addXp(archer, 0);
 
             assertFalse(leveledUp);
-            assertEquals(5, archer.xp);
+            assertEquals(5, archer.getXp());
         }
 
         @Test
         @DisplayName("addXp - level up de 1 à 2")
         void testAddXpLevelUpFrom1To2() {
-            archer.xp = 0;
+            archer.setXp(0);
 
             boolean leveledUp = UpdatePlayer.addXp(archer, 10);
 
             assertTrue(leveledUp);
-            assertEquals(10, archer.xp);
+            assertEquals(10, archer.getXp());
             assertEquals(2, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("addXp - level up de 2 à 3")
         void testAddXpLevelUpFrom2To3() {
-            archer.xp = 10;
+            archer.setXp(10);
 
             boolean leveledUp = UpdatePlayer.addXp(archer, 17);
 
             assertTrue(leveledUp);
-            assertEquals(27, archer.xp);
+            assertEquals(27, archer.getXp());
             assertEquals(3, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("addXp - level up de 3 à 4")
         void testAddXpLevelUpFrom3To4() {
-            archer.xp = 27;
+            archer.setXp(27);
 
             boolean leveledUp = UpdatePlayer.addXp(archer, 30);
 
             assertTrue(leveledUp);
-            assertEquals(57, archer.xp);
+            assertEquals(57, archer.getXp());
             assertEquals(4, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("addXp - level up de 4 à 5")
         void testAddXpLevelUpFrom4To5() {
-            archer.xp = 57;
+            archer.setXp(57);
 
             boolean leveledUp = UpdatePlayer.addXp(archer, 54);
 
             assertTrue(leveledUp);
-            assertEquals(111, archer.xp);
+            assertEquals(111, archer.getXp());
             assertEquals(5, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("addXp - level up de plusieurs niveaux")
         void testAddXpLevelUpManyLevels() {
-            archer.xp = 0;
+            archer.setXp(0);
             assertEquals(1, archer.retrieveLevel());
 
             boolean leveledUp = UpdatePlayer.addXp(archer, 111);
 
             assertTrue(leveledUp);
-            assertEquals(111, archer.xp);
+            assertEquals(111, archer.getXp());
             assertEquals(5, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("addXp - ajout d'un objet aléatoire lors du level up")
         void testAddXpAddsRandomObjectOnLevelUp() {
-            archer.xp = 0;
-            archer.inventory.clear();
+            archer.setXp(0);
+            archer.getInventory().clear();
 
             UpdatePlayer.addXp(archer, 10);
 
-            assertEquals(1, archer.inventory.size());
-            assertNotNull(archer.inventory.getFirst());
+            assertEquals(1, archer.getInventory().size());
+            assertNotNull(archer.getInventory().getFirst());
         }
 
         @Test
@@ -131,11 +131,11 @@ public class UpdatePlayerTest {
         void testAddXpUpdatesAbilitiesForArcher() {
             Archer archerClass = new Archer();
 
-            assertNotEquals(archerClass.getAbilitiesByLevel(2), archer.abilities);
+            assertNotEquals(archerClass.getAbilitiesByLevel(2), archer.getAbilities());
 
             UpdatePlayer.addXp(archer, 10);
 
-            assertNotEquals(archerClass.getAbilitiesByLevel(2), archer.abilities);
+            assertNotEquals(archerClass.getAbilitiesByLevel(2), archer.getAbilities());
         }
 
         @Test
@@ -143,11 +143,11 @@ public class UpdatePlayerTest {
         void testAddXpUpdatesAbilitiesForAdventurer() {
             Adventurer adventurerClass = new Adventurer();
 
-            assertNotEquals(adventurerClass.getAbilitiesByLevel(3), adventurer.abilities);
+            assertNotEquals(adventurerClass.getAbilitiesByLevel(3), adventurer.getAbilities());
 
             UpdatePlayer.addXp(adventurer, 17);
 
-            assertNotEquals(adventurerClass.getAbilitiesByLevel(3), adventurer.abilities);
+            assertNotEquals(adventurerClass.getAbilitiesByLevel(3), adventurer.getAbilities());
         }
 
         @Test
@@ -155,11 +155,11 @@ public class UpdatePlayerTest {
         void testAddXpUpdatesAbilitiesForDwarf() {
             Dwarf dwarfClass = new Dwarf();
 
-            assertNotEquals(dwarfClass.getAbilitiesByLevel(2), dwarf.abilities);
+            assertNotEquals(dwarfClass.getAbilitiesByLevel(2), dwarf.getAbilities());
 
             UpdatePlayer.addXp(dwarf, 10);
 
-            assertNotEquals(dwarfClass.getAbilitiesByLevel(2), dwarf.abilities);
+            assertNotEquals(dwarfClass.getAbilitiesByLevel(2), dwarf.getAbilities());
         }
 
     }
@@ -169,134 +169,134 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("majFinDeTour - joueur KO (HP = 0)")
         void testMajFinDeTourPlayerKO() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 0;
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(0);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // Le joueur reste à 0 HP
-            assertEquals(0, archer.currenthealthpoints);
+            assertEquals(0, archer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP < 50% sans Magic Bow")
         void testMajFinDeTourArcherLowHealthNoMagicBow() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 40;
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(40);
 
             UpdatePlayer.majFinDeTour(archer);
 
-            assertEquals(41, archer.currenthealthpoints);
+            assertEquals(41, archer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP < 50% avec Magic Bow")
         void testMajFinDeTourArcherLowHealthWithMagicBow() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 40;
-            archer.inventory.add("Magic Bow");
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(40);
+            archer.addObjectInventory("Magic Bow");
 
             UpdatePlayer.majFinDeTour(archer);
 
             // 40 + 1 = 41, puis 41 + (41/8 - 1) = 41 + 4 = 45
-            assertEquals(45, archer.currenthealthpoints);
+            assertEquals(45, archer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - DWARF avec HP < 50% sans Holy Elixir")
         void testMajFinDeTourDwarfLowHealthNoElixir() {
-            dwarf.healthpoints = 100;
-            dwarf.currenthealthpoints = 40;
+            dwarf.setHealthpoints(100);
+            dwarf.setCurrenthealthpoints(40);
 
             UpdatePlayer.majFinDeTour(dwarf);
 
-            assertEquals(41, dwarf.currenthealthpoints);
+            assertEquals(41, dwarf.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - DWARF avec HP < 50% avec Holy Elixir")
         void testMajFinDeTourDwarfLowHealthWithElixir() {
-            dwarf.healthpoints = 100;
-            dwarf.currenthealthpoints = 40;
-            dwarf.inventory.add("Holy Elixir");
+            dwarf.setHealthpoints(100);
+            dwarf.setCurrenthealthpoints(40);
+            dwarf.addObjectInventory("Holy Elixir");
 
             UpdatePlayer.majFinDeTour(dwarf);
 
             // 40 + 1 (elixir) + 1 (dwarf) = 42
-            assertEquals(42, dwarf.currenthealthpoints);
+            assertEquals(42, dwarf.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau < 3")
         void testMajFinDeTourAdventurerLowHealthLowLevel() {
-            adventurer.healthpoints = 100;
-            adventurer.currenthealthpoints = 40;
-            adventurer.xp = 0; // niveau 1
+            adventurer.setHealthpoints(100);
+            adventurer.setCurrenthealthpoints(40);
+            adventurer.setXp(0); // niveau 1
 
             UpdatePlayer.majFinDeTour(adventurer);
 
             // 40 + 2 - 1 = 41
-            assertEquals(41, adventurer.currenthealthpoints);
+            assertEquals(41, adventurer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau >= 3")
         void testMajFinDeTourAdventurerLowHealthHighLevel() {
-            adventurer.healthpoints = 100;
-            adventurer.currenthealthpoints = 40;
-            adventurer.xp = 27; // niveau 3
+            adventurer.setHealthpoints(100);
+            adventurer.setCurrenthealthpoints(40);
+            adventurer.setXp(27); // niveau 3
 
             UpdatePlayer.majFinDeTour(adventurer);
 
             // 40 + 2 = 42
-            assertEquals(42, adventurer.currenthealthpoints);
+            assertEquals(42, adventurer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - joueur avec HP >= 50% et < max")
         void testMajFinDeTourPlayerHealthAboveHalf() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 60;
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(60);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // Pas de changement dans cette condition
-            assertEquals(60, archer.currenthealthpoints);
+            assertEquals(60, archer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - joueur avec HP = max")
         void testMajFinDeTourPlayerFullHealth() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 100;
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(100);
 
             UpdatePlayer.majFinDeTour(archer);
 
-            assertEquals(100, archer.currenthealthpoints);
+            assertEquals(100, archer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP exactement à 50%")
         void testMajFinDeTourArcherExactlyHalfHealth() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 50;
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(50);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // HP >= healthpoints/2, donc pas de soin
-            assertEquals(50, archer.currenthealthpoints);
+            assertEquals(50, archer.getCurrenthealthpoints());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP juste en dessous de 50%")
         void testMajFinDeTourArcherJustBelowHalfHealth() {
-            archer.healthpoints = 100;
-            archer.currenthealthpoints = 49;
+            archer.setHealthpoints(100);
+            archer.setCurrenthealthpoints(49);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // HP < healthpoints/2, donc soin
-            assertEquals(50, archer.currenthealthpoints);
+            assertEquals(50, archer.getCurrenthealthpoints());
         }
     }
 
