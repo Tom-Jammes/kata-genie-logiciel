@@ -28,7 +28,6 @@ public class UpdatePlayer {
         newAbilities.forEach((ability, level) -> player.getAbilities().put(ability, level));
     }
 
-    // majFinDeTour met à jour les points de vie
     public static void updateEndOfRound(Player player) {
         if(player.getCurrentHP() == 0) {
             System.out.println("Le joueur est KO !");
