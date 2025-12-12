@@ -36,7 +36,7 @@ public class UpdatePlayer {
         }
 
         if(player.getCurrentHP() < player.getMaxHP()/2) {
-            player.setCurrentHP(player.getCurrentHP()+player.getAvatarClassObject().calculateHealthRegeneration(player));
+            player.heal();
         }
 
         if(player.getCurrentHP() > player.getMaxHP()) {

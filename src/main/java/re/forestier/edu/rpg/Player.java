@@ -110,6 +110,10 @@ public class Player {
         this.currentHP = currentHP;
     }
 
+    public void heal() {
+        this.currentHP += this.avatarClass.calculateHealthRegeneration(this);
+    }
+
     public HashMap<String, Integer> getAbilities() {
         return abilities;
     }
