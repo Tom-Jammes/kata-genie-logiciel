@@ -30,17 +30,17 @@ public class UpdatePlayer {
 
     // majFinDeTour met à jour les points de vie
     public static void majFinDeTour(Player player) {
-        if(player.getCurrenthealthpoints() == 0) {
+        if(player.getCurrentHP() == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
 
-        if(player.getCurrenthealthpoints() < player.getHealthpoints()/2) {
-            player.setCurrenthealthpoints(player.getCurrenthealthpoints()+player.getAvatarClassObject().calculateHealthRegeneration(player));
+        if(player.getCurrentHP() < player.getMaxHP()/2) {
+            player.setCurrentHP(player.getCurrentHP()+player.getAvatarClassObject().calculateHealthRegeneration(player));
         }
 
-        if(player.getCurrenthealthpoints() > player.getHealthpoints()) {
-            player.setCurrenthealthpoints(player.getHealthpoints());
+        if(player.getCurrentHP() > player.getMaxHP()) {
+            player.setCurrentHP(player.getMaxHP());
         }
     }
 }

@@ -15,8 +15,8 @@ public class Player {
 
     private Integer money;
 
-    private int healthpoints;
-    private int currenthealthpoints;
+    private int maxHP;
+    private int currentHP;
     private int xp;
 
     private HashMap<String, Integer> abilities;
@@ -94,20 +94,20 @@ public class Player {
         return money;
     }
 
-    public int getHealthpoints() {
-        return healthpoints;
+    public int getMaxHP() {
+        return maxHP;
     }
 
-    public void setHealthpoints(int healthpoints) {
-        this.healthpoints = healthpoints;
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
-    public int getCurrenthealthpoints() {
-        return currenthealthpoints;
+    public int getCurrentHP() {
+        return currentHP;
     }
 
-    public void setCurrenthealthpoints(int currenthealthpoints) {
-        this.currenthealthpoints = currenthealthpoints;
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
     }
 
     public HashMap<String, Integer> getAbilities() {

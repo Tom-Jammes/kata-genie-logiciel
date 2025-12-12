@@ -169,134 +169,134 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("majFinDeTour - joueur KO (HP = 0)")
         void testMajFinDeTourPlayerKO() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(0);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(0);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // Le joueur reste à 0 HP
-            assertEquals(0, archer.getCurrenthealthpoints());
+            assertEquals(0, archer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP < 50% sans Magic Bow")
         void testMajFinDeTourArcherLowHealthNoMagicBow() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(40);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(40);
 
             UpdatePlayer.majFinDeTour(archer);
 
-            assertEquals(41, archer.getCurrenthealthpoints());
+            assertEquals(41, archer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP < 50% avec Magic Bow")
         void testMajFinDeTourArcherLowHealthWithMagicBow() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(40);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(40);
             archer.addObjectInventory("Magic Bow");
 
             UpdatePlayer.majFinDeTour(archer);
 
             // 40 + 1 = 41, puis 41 + (41/8 - 1) = 41 + 4 = 45
-            assertEquals(45, archer.getCurrenthealthpoints());
+            assertEquals(45, archer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - DWARF avec HP < 50% sans Holy Elixir")
         void testMajFinDeTourDwarfLowHealthNoElixir() {
-            dwarf.setHealthpoints(100);
-            dwarf.setCurrenthealthpoints(40);
+            dwarf.setMaxHP(100);
+            dwarf.setCurrentHP(40);
 
             UpdatePlayer.majFinDeTour(dwarf);
 
-            assertEquals(41, dwarf.getCurrenthealthpoints());
+            assertEquals(41, dwarf.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - DWARF avec HP < 50% avec Holy Elixir")
         void testMajFinDeTourDwarfLowHealthWithElixir() {
-            dwarf.setHealthpoints(100);
-            dwarf.setCurrenthealthpoints(40);
+            dwarf.setMaxHP(100);
+            dwarf.setCurrentHP(40);
             dwarf.addObjectInventory("Holy Elixir");
 
             UpdatePlayer.majFinDeTour(dwarf);
 
             // 40 + 1 (elixir) + 1 (dwarf) = 42
-            assertEquals(42, dwarf.getCurrenthealthpoints());
+            assertEquals(42, dwarf.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau < 3")
         void testMajFinDeTourAdventurerLowHealthLowLevel() {
-            adventurer.setHealthpoints(100);
-            adventurer.setCurrenthealthpoints(40);
+            adventurer.setMaxHP(100);
+            adventurer.setCurrentHP(40);
             adventurer.setXp(0); // niveau 1
 
             UpdatePlayer.majFinDeTour(adventurer);
 
             // 40 + 2 - 1 = 41
-            assertEquals(41, adventurer.getCurrenthealthpoints());
+            assertEquals(41, adventurer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau >= 3")
         void testMajFinDeTourAdventurerLowHealthHighLevel() {
-            adventurer.setHealthpoints(100);
-            adventurer.setCurrenthealthpoints(40);
+            adventurer.setMaxHP(100);
+            adventurer.setCurrentHP(40);
             adventurer.setXp(27); // niveau 3
 
             UpdatePlayer.majFinDeTour(adventurer);
 
             // 40 + 2 = 42
-            assertEquals(42, adventurer.getCurrenthealthpoints());
+            assertEquals(42, adventurer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - joueur avec HP >= 50% et < max")
         void testMajFinDeTourPlayerHealthAboveHalf() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(60);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(60);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // Pas de changement dans cette condition
-            assertEquals(60, archer.getCurrenthealthpoints());
+            assertEquals(60, archer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - joueur avec HP = max")
         void testMajFinDeTourPlayerFullHealth() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(100);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(100);
 
             UpdatePlayer.majFinDeTour(archer);
 
-            assertEquals(100, archer.getCurrenthealthpoints());
+            assertEquals(100, archer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP exactement à 50%")
         void testMajFinDeTourArcherExactlyHalfHealth() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(50);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(50);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // HP >= healthpoints/2, donc pas de soin
-            assertEquals(50, archer.getCurrenthealthpoints());
+            assertEquals(50, archer.getCurrentHP());
         }
 
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP juste en dessous de 50%")
         void testMajFinDeTourArcherJustBelowHalfHealth() {
-            archer.setHealthpoints(100);
-            archer.setCurrenthealthpoints(49);
+            archer.setMaxHP(100);
+            archer.setCurrentHP(49);
 
             UpdatePlayer.majFinDeTour(archer);
 
             // HP < healthpoints/2, donc soin
-            assertEquals(50, archer.getCurrenthealthpoints());
+            assertEquals(50, archer.getCurrentHP());
         }
     }
 

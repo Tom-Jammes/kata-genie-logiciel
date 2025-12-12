@@ -10,7 +10,7 @@ public class Archer extends AvatarClassAbstract {
     public int calculateHealthRegeneration(Player player) {
         int regen = 1;
         if(player.getInventory().contains("Magic Bow")) {
-           regen += player.getCurrenthealthpoints()/8-1;
+           regen += player.getCurrentHP()/8-1;
         }
         return regen;
     }
