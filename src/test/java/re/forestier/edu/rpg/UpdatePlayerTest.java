@@ -285,6 +285,18 @@ public class UpdatePlayerTest {
         }
 
         @Test
+        @DisplayName("majFinDeTour - ARCHER avec HP supérieurs à 100%")
+        void testMajFinDeTourArcherTooHealed() {
+            archer.healthpoints = 100;
+            archer.currenthealthpoints = 150;
+
+            UpdatePlayer.majFinDeTour(archer);
+
+            // HP >= healthpoints, donc pas remise à 100%
+            assertEquals(100, archer.currenthealthpoints);
+        }
+
+        @Test
         @DisplayName("majFinDeTour - ARCHER avec HP juste en dessous de 50%")
         void testMajFinDeTourArcherJustBelowHalfHealth() {
             archer.healthpoints = 100;
