@@ -128,23 +128,30 @@ public class UpdatePlayerTest {
         void testAddXpUpdatesAbilitiesForArcher() {
             archer.xp = 0;
 
-            assertNotEquals(UpdatePlayer.abilitiesPerTypeAndLevel().get("ARCHER").get(2), archer.abilities);
+            assertEquals(1, archer.abilities.get("INT"));
+            assertEquals(1, archer.abilities.get("CHA"));
+            assertNull(archer.abilities.get("DEF"));
 
             UpdatePlayer.addXp(archer, 10);
 
-            assertNotEquals(UpdatePlayer.abilitiesPerTypeAndLevel().get("ARCHER").get(2), archer.abilities);
+            assertEquals(1, archer.abilities.get("INT"));
+            assertEquals(2, archer.abilities.get("CHA"));
+            assertNotNull(archer.abilities.get("DEF"));
         }
 
         @Test
         @DisplayName("addXp - mise à jour des capacités lors du level up ADVENTURER")
         void testAddXpUpdatesAbilitiesForAdventurer() {
-            adventurer.xp = 10;
-
-            assertNotEquals(UpdatePlayer.abilitiesPerTypeAndLevel().get("ADVENTURER").get(3), adventurer.abilities);
-
+            UpdatePlayer.addXp(adventurer, 10);
             UpdatePlayer.addXp(adventurer, 17);
 
-            assertNotEquals(UpdatePlayer.abilitiesPerTypeAndLevel().get("ADVENTURER").get(3), adventurer.abilities);
+            assertEquals(5, adventurer.abilities.get("ATK"));
+            assertEquals(1, adventurer.abilities.get("ALC"));
+            assertEquals(1, adventurer.abilities.get("DEF"));
+
+            UpdatePlayer.addXp(adventurer, 32);
+
+            assertEquals(3, adventurer.abilities.get("DEF"));
         }
 
         @Test
@@ -152,11 +159,13 @@ public class UpdatePlayerTest {
         void testAddXpUpdatesAbilitiesForDwarf() {
             dwarf.xp = 0;
 
-            assertNotEquals(UpdatePlayer.abilitiesPerTypeAndLevel().get("DWARF").get(2), dwarf.abilities);
+            assertEquals(4, dwarf.abilities.get("ALC"));
+            assertNull(dwarf.abilities.get("DEF"));
 
             UpdatePlayer.addXp(dwarf, 10);
 
-            assertNotEquals(UpdatePlayer.abilitiesPerTypeAndLevel().get("DWARF").get(2), dwarf.abilities);
+            assertEquals(5, dwarf.abilities.get("ALC"));
+            assertEquals(1, dwarf.abilities.get("DEF"));
         }
 
     }
