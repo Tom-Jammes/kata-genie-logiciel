@@ -18,6 +18,6 @@ public abstract class AvatarClassAbstract {
 
 
     public HashMap<String, Integer> getAbilitiesByLevel(int level) {
-        return abilitiesByLevel.getOrDefault(level, new HashMap<>());
+        return new HashMap<>(abilitiesByLevel.getOrDefault(level, new HashMap<>()));
     }
 }
