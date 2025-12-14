@@ -242,10 +242,14 @@ public class UpdatePlayerTest {
             assertEquals(111, archer.xp);
             assertEquals(5, archer.retrieveLevel());
         }
+    }
+
+    @Nested
+    class BehaviorLevelUp {
 
         @Test
-        @DisplayName("addXp - ajout d'un objet aléatoire lors du level up")
-        void testAddXpAddsRandomObjectOnLevelUp() {
+        @DisplayName("LevelUp - ajout d'un objet aléatoire lors du level up")
+        void testAddsRandomObjectOnLevelUp() {
             archer.xp = 0;
             archer.inventory.clear();
 
@@ -256,50 +260,38 @@ public class UpdatePlayerTest {
         }
 
         @Test
-        @DisplayName("addXp - mise à jour des capacités lors du level up ARCHER")
-        void testAddXpUpdatesAbilitiesForArcher() {
+        @DisplayName("LevelUp - mise à jour des niveaux des capacités lors du level up")
+        void testUpdatesAbilitiesLevelWhenLevelUp() {
             archer.xp = 0;
 
-            assertEquals(1, archer.abilities.get("INT"));
+            assertEquals(1, archer.retrieveLevel());
             assertEquals(1, archer.abilities.get("CHA"));
             assertNull(archer.abilities.get("DEF"));
 
             UpdatePlayer.addXp(archer, 10);
 
-            assertEquals(1, archer.abilities.get("INT"));
+            assertEquals(2, archer.retrieveLevel());
             assertEquals(2, archer.abilities.get("CHA"));
-            assertNotNull(archer.abilities.get("DEF"));
+            assertEquals(1, archer.abilities.get("DEF"));
         }
 
         @Test
-        @DisplayName("addXp - mise à jour des capacités lors du level up ADVENTURER")
-        void testAddXpUpdatesAbilitiesForAdventurer() {
-            UpdatePlayer.addXp(adventurer, 10);
-            UpdatePlayer.addXp(adventurer, 17);
+        @DisplayName("LevelUp - Player garde les capacités du niveau précédent quand levelUp")
+        void testKeepPreviousAbilitiesWhenLevelUp() {
+            archer.xp = 0;
 
-            assertEquals(5, adventurer.abilities.get("ATK"));
-            assertEquals(1, adventurer.abilities.get("ALC"));
-            assertEquals(1, adventurer.abilities.get("DEF"));
+            assertEquals(1, archer.retrieveLevel());
+            assertEquals(1, archer.abilities.get("INT"));
+            assertEquals(3, archer.abilities.get("ATK"));
+            assertEquals(3, archer.abilities.get("VIS"));
 
-            UpdatePlayer.addXp(adventurer, 32);
+            UpdatePlayer.addXp(archer, 10);
 
-            assertEquals(3, adventurer.abilities.get("DEF"));
+            assertEquals(2, archer.retrieveLevel());
+            assertEquals(1, archer.abilities.get("INT"));
+            assertEquals(3, archer.abilities.get("ATK"));
+            assertEquals(3, archer.abilities.get("VIS"));
         }
-
-        @Test
-        @DisplayName("addXp - mise à jour des capacités lors du level up DWARF")
-        void testAddXpUpdatesAbilitiesForDwarf() {
-            dwarf.xp = 0;
-
-            assertEquals(4, dwarf.abilities.get("ALC"));
-            assertNull(dwarf.abilities.get("DEF"));
-
-            UpdatePlayer.addXp(dwarf, 10);
-
-            assertEquals(5, dwarf.abilities.get("ALC"));
-            assertEquals(1, dwarf.abilities.get("DEF"));
-        }
-
     }
 
     @Nested
