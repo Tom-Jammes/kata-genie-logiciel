@@ -59,11 +59,6 @@ public class Player {
     public int getXp() {
         return this.xp;
     }
-
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-
     public boolean addXp(int xp) {
         int currentLevel = this.retrieveLevel();
         this.xp += xp;

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import re.forestier.edu.rpg.avatarclasses.AvatarClass;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -161,63 +160,63 @@ public class PlayerTest {
         @Test
         @DisplayName("retrieveLevel - niveau 1 avec XP = 9")
         void testRetrieveLevelOne_XpNine() {
-            archer.setXp(9);
+            archer.addXp(9);
             assertEquals(1, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 2 avec XP = 10")
         void testRetrieveLevelTwo_XpTen() {
-            archer.setXp(10);
+            archer.addXp(10);
             assertEquals(2, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 2 avec XP = 26")
         void testRetrieveLevelTwo_XpTwentySix() {
-            archer.setXp(26);
+            archer.addXp(26);
             assertEquals(2, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 3 avec XP = 27")
         void testRetrieveLevelThree_XpTwentySeven() {
-            archer.setXp(27);
+            archer.addXp(27);
             assertEquals(3, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 3 avec XP = 56")
         void testRetrieveLevelThree_XpFiftySix() {
-            archer.setXp(56);
+            archer.addXp(56);
             assertEquals(3, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 4 avec XP = 57")
         void testRetrieveLevelFour_XpFiftySeven() {
-            archer.setXp(57);
+            archer.addXp(57);
             assertEquals(4, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 4 avec XP = 110")
         void testRetrieveLevelFour_XpOneHundredTen() {
-            archer.setXp(110);
+            archer.addXp(110);
             assertEquals(4, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 5 avec XP = 111")
         void testRetrieveLevelFive_XpOneHundredEleven() {
-            archer.setXp(111);
+            archer.addXp(111);
             assertEquals(5, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 5 avec XP très élevé")
         void testRetrieveLevelFive_HighXp() {
-            archer.setXp(10000);
+            archer.addXp(10000);
             assertEquals(5, archer.retrieveLevel());
         }
     }
@@ -227,7 +226,7 @@ public class PlayerTest {
         @Test
         @DisplayName("getXp retourne la valeur correcte")
         void testGetXp() {
-            archer.setXp(50);
+            archer.addXp(50);
 
             assertEquals(50, archer.getXp());
         }
@@ -252,7 +251,7 @@ public class PlayerTest {
         @Test
         @DisplayName("addXp - ajout de 0 XP")
         void testAddXpZero() {
-            archer.setXp(5);
+            archer.addXp(5);
 
             boolean leveledUp = archer.addXp(0);
 
@@ -388,7 +387,7 @@ public class PlayerTest {
         @DisplayName("UpdateEndOfRound - ADVENTURER avec HP < 50% et niveau >= 3")
         void testUpdateEndOfRoundAdventurerLowHealthHighLevel() {
             adventurer.setCurrentHP(40);
-            adventurer.setXp(27); // niveau 3
+            adventurer.addXp(27); // niveau 3
 
             adventurer.updateEndOfRound();
 
