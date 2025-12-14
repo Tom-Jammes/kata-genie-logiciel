@@ -19,28 +19,11 @@ public class Dwarf extends AvatarClassAbstract {
     protected HashMap<Integer, HashMap<String, Integer>> initializeAbilities() {
         HashMap<Integer, HashMap<String, Integer>> abilities = new HashMap<>();
 
-        HashMap<String, Integer> level1 = new HashMap<>();
-        level1.put("ALC", 4);
-        level1.put("INT", 1);
-        level1.put("ATK", 3);
-        abilities.put(1, level1);
-
-        HashMap<String, Integer> level2 = new HashMap<>();
-        level2.put("DEF", 1);
-        level2.put("ALC", 5);
-        abilities.put(2, level2);
-
-        HashMap<String, Integer> level3 = new HashMap<>();
-        level3.put("ATK", 4);
-        abilities.put(3, level3);
-
-        HashMap<String, Integer> level4 = new HashMap<>();
-        level4.put("DEF", 2);
-        abilities.put(4, level4);
-
-        HashMap<String, Integer> level5 = new HashMap<>();
-        level5.put("CHA", 1);
-        abilities.put(5, level5);
+        abilities.put(1, abilities("ALC", 4, "INT", 1, "ATK", 3));
+        abilities.put(2, abilities("DEF", 1, "ALC", 5));
+        abilities.put(3, abilities("ATK", 4));
+        abilities.put(4, abilities("DEF", 2));
+        abilities.put(5, abilities("CHA", 1));
 
         return abilities;
     }

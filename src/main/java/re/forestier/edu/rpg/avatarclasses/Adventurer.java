@@ -19,31 +19,11 @@ public class Adventurer extends AvatarClassAbstract {
     protected HashMap<Integer, HashMap<String, Integer>> initializeAbilities() {
         HashMap<Integer, HashMap<String, Integer>> abilities = new HashMap<>();
 
-        HashMap<String, Integer> level1 = new HashMap<>();
-        level1.put("INT", 1);
-        level1.put("DEF", 1);
-        level1.put("ATK", 3);
-        level1.put("CHA", 2);
-        abilities.put(1, level1);
-
-        HashMap<String, Integer> level2 = new HashMap<>();
-        level1.put("INT", 2);
-        level1.put("CHA", 3);
-        abilities.put(2, level2);
-
-        HashMap<String, Integer> level3 = new HashMap<>();
-        level3.put("ATK", 5);
-        level3.put("ALC", 1);
-        abilities.put(3, level3);
-
-        HashMap<String, Integer> level4 = new HashMap<>();
-        level4.put("DEF", 3);
-        abilities.put(4, level4);
-
-        HashMap<String, Integer> level5 = new HashMap<>();
-        level5.put("VIS", 1);
-        level5.put("DEF", 4);
-        abilities.put(5, level5);
+        abilities.put(1, abilities("INT", 1, "DEF", 1, "ATK", 3, "CHA", 2));
+        abilities.put(2, abilities("INT", 2, "CHA", 3));
+        abilities.put(3, abilities("ATK", 5, "ALC", 1));
+        abilities.put(4, abilities("DEF", 3));
+        abilities.put(5, abilities("VIS", 1, "DEF", 4));
 
         return abilities;
     }
