@@ -17,6 +17,7 @@ public class Player {
             "Holy Elixir : Recover your HP"
     };
     private final static int MAXIMUM_LEVEL = 5;
+    private static final double HEALING_THRESHOLD = 0.5; // 50%
 
     private final String playerName;
     private final String avatarName;
@@ -76,7 +77,7 @@ public class Player {
         if(this.currentHP == 0) {
             return;
         }
-        if(this.currentHP < this.maxHP/2) {
+        if(this.currentHP < this.maxHP * HEALING_THRESHOLD) {
             heal();
         }
         if(this.currentHP > this.maxHP) {
