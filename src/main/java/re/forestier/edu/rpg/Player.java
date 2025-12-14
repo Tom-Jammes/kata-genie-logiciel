@@ -4,21 +4,27 @@ import re.forestier.edu.rpg.avatarclasses.AvatarClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Player {
-
+    private final static String[] objectList = {
+            "Lookout Ring : Prevents surprise attacks",
+            "Scroll of Stupidity : INT-2 when applied to an enemy",
+            "Draupnir : Increases XP gained by 100%",
+            "Magic Charm : Magic +10 for 5 rounds",
+            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
+            "Combat Edge : Well, that's an edge",
+            "Holy Elixir : Recover your HP"
+    };
     private final int MAXIMUM_LEVEL = 5;
 
     private String playerName;
     private String avatarName;
     private final AvatarClass avatarClass;
-
     private Integer money;
-
     private int maxHP;
     private int currentHP;
     private int xp;
-
     private HashMap<String, Integer> abilities;
     private ArrayList<String> inventory;
 
@@ -70,6 +76,29 @@ public class Player {
         return retrieveLevelFromXp(currentLvl+1, xpNextLvl);
     }
 
+    public void updateEndOfRound() {
+        if(this.currentHP == 0) {
+            System.out.println("Le joueur est KO !");
+            return;
+        }
+
+        if(this.currentHP < this.maxHP/2) {
+            heal();
+        }
+
+        if(this.currentHP > this.maxHP) {
+            this.currentHP = this.maxHP;
+        }
+    }
+
+    private void levelUp() {
+        Random random = new Random();
+        this.addObjectInventory(objectList[random.nextInt(objectList.length)]);
+
+        HashMap<String, Integer> newAbilities = this.avatarClass.getAbilitiesByLevel(retrieveLevel());
+        this.abilities.putAll(newAbilities);
+    }
+
     public int getXp() {
         return this.xp;
     }
@@ -78,8 +107,16 @@ public class Player {
         this.xp = xp;
     }
 
-    public void addXp(int xp) {
+    public boolean addXp(int xp) {
+        int currentLevel = this.retrieveLevel();
         this.xp += xp;
+        int newLevel = this.retrieveLevel();
+
+        if (newLevel != currentLevel) {
+            levelUp();
+            return true;
+        }
+        return false;
     }
 
     public String getPlayerName() {
