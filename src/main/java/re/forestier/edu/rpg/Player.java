@@ -33,7 +33,6 @@ public class Player {
         if (this.avatarClass == null) {
             return;
         }
-
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.money = money;
@@ -49,7 +48,6 @@ public class Player {
         if (money - amount < 0) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
-
         money -= amount;
     }
 
@@ -58,12 +56,10 @@ public class Player {
     }
 
     public int retrieveLevel() {
-
         return retrieveLevelFromXp(1,0);
     }
 
     private int retrieveLevelFromXp(int currentLvl, int xpForCurrentLvl) {
-
         int xpNextLvl = currentLvl * 10 + (currentLvl+1)*xpForCurrentLvl/4; // Formule to calculate the xp needed for lvlUp
 
         if (this.xp < xpNextLvl || currentLvl == MAXIMUM_LEVEL) {
@@ -77,11 +73,9 @@ public class Player {
             System.out.println("Le joueur est KO !");
             return;
         }
-
         if(this.currentHP < this.maxHP/2) {
             heal();
         }
-
         if(this.currentHP > this.maxHP) {
             this.currentHP = this.maxHP;
         }
