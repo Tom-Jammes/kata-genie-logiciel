@@ -12,7 +12,7 @@ import static org.approvaltests.Approvals.verify;
 public class DisplayTest {
 
     @Test
-    void testAffichageBase() {
+    void testDisplayPlayerAsString() {
         Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 200, new ArrayList<>());
         player.addXp(20);
         player.setInventory(new ArrayList<>());
