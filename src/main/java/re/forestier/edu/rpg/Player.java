@@ -42,7 +42,7 @@ public class Player {
     }
 
     public void removeMoney(int amount) {
-        if (money - amount < 0) {
+        if (money < amount) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
         money -= amount;
