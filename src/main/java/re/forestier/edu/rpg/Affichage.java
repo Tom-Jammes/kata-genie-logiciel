@@ -1,5 +1,7 @@
 package re.forestier.edu.rpg;
 
+import java.util.Map;
+
 public class Affichage {
 
     public static String afficherJoueur(Player player) {
@@ -17,18 +19,23 @@ public class Affichage {
 
         /* Capacities */
         display.append("\n");
-        display.append("Capacités :");
-        player.getAbilities().forEach((name, level) -> {
-            display.append("\n").append("   ").append(name).append(" : ").append(level);
-        });
+        display.append("Capacités :"); // Abilities sorted by name
+        player.getAbilities().entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> {
+                    display.append("\n").append("   ")
+                            .append(entry.getKey()).append(" : ").append(entry.getValue());
+                });
         display.append("\n");
 
         /* Inventory */
         display.append("\n");
-        display.append("Inventaire :");
-        player.getInventory().forEach((name) -> {
-            display.append("\n").append("   ").append(name);
-        });
+        display.append("Inventaire :"); // Inventory sorted by object's name
+        player.getInventory().stream()
+                .sorted()
+                .forEach(name -> {
+                    display.append("\n").append("   ").append(name);
+                });
         display.append("\n");
 
         return display.toString();
