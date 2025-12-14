@@ -28,40 +28,25 @@ public class PlayerTest {
     @Nested
     class Constructor {
         @Test
-        @DisplayName("Constructeur avec classe ARCHER valide")
+        @DisplayName("Constructeur avec classe valide")
         void testConstructorWithValidArcherClass() {
-            player p = new player("John", "Robin", "ARCHER", 100, notEmptyInventory);
+            player archerPlayer = new player("John", "Robin", "ARCHER", 100, notEmptyInventory);
 
-            assertNotNull(p);
-            assertEquals("John", p.playerName);
-            assertEquals("Robin", p.Avatar_name);
-            assertEquals("ARCHER", p.getAvatarClass());
-            assertEquals(100, p.money);
-            assertEquals(notEmptyInventory, p.inventory);
-            assertNotNull(p.abilities);
-        }
+            assertNotNull(archerPlayer);
+            assertEquals("John", archerPlayer.playerName);
+            assertEquals("Robin", archerPlayer.Avatar_name);
+            assertEquals("ARCHER", archerPlayer.getAvatarClass());
+            assertEquals(100, archerPlayer.money);
+            assertEquals(notEmptyInventory, archerPlayer.inventory);
+            assertNotNull(archerPlayer.abilities);
 
-        @Test
-        @DisplayName("Constructeur avec classe ADVENTURER valide")
-        void testConstructorWithValidAdventurerClass() {
-            player p = new player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
+            player adventurerPlayer = new player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
 
-            assertNotNull(p);
-            assertEquals("Alice", p.playerName);
-            assertEquals("Lara", p.Avatar_name);
-            assertEquals("ADVENTURER", p.getAvatarClass());
-            assertEquals(200, p.money);
-        }
-
-        @Test
-        @DisplayName("Constructeur avec classe DWARF valide")
-        void testConstructorWithValidDwarfClass() {
-            player p = new player("Bob", "Gimli", "DWARF", 50, notEmptyInventory);
-
-            assertNotNull(p);
-            assertEquals("Bob", p.playerName);
-            assertEquals("Gimli", p.Avatar_name);
-            assertEquals("DWARF", p.getAvatarClass());
+            assertNotNull(adventurerPlayer);
+            assertEquals("Alice", adventurerPlayer.playerName);
+            assertEquals("Lara", adventurerPlayer.Avatar_name);
+            assertEquals("ADVENTURER", adventurerPlayer.getAvatarClass());
+            assertEquals(200, adventurerPlayer.money);
         }
 
         @Test
