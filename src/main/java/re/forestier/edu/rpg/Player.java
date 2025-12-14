@@ -16,7 +16,7 @@ public class Player {
             "Combat Edge : Well, that's an edge",
             "Holy Elixir : Recover your HP"
     };
-    private final int MAXIMUM_LEVEL = 5;
+    private final static int MAXIMUM_LEVEL = 5;
 
     private final String playerName;
     private final String avatarName;
@@ -37,55 +37,24 @@ public class Player {
         this.abilities = this.avatarClass.getAbilitiesByLevel(1);
     }
 
-    public AvatarClass getAvatarClass () {
-        return this.avatarClass;
-    }
-
+    /* ====================== MONEY ====================== */
     public void removeMoney(int amount) {
         if (money < amount) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
         money -= amount;
     }
-
     public void addMoney(int amount) {
         money += amount;
     }
+    public Integer getMoney() {
+        return money;
+    }
 
+    /* ====================== XP ====================== */
     public int retrieveLevel() {
         return retrieveLevelFromXp(1,0);
     }
-
-    private int retrieveLevelFromXp(int currentLvl, int xpForCurrentLvl) {
-        int xpNextLvl = currentLvl * 10 + (currentLvl+1)*xpForCurrentLvl/4; // Formule to calculate the xp needed for lvlUp
-
-        if (this.xp < xpNextLvl || currentLvl == MAXIMUM_LEVEL) {
-            return currentLvl;
-        }
-        return retrieveLevelFromXp(currentLvl+1, xpNextLvl);
-    }
-
-    public void updateEndOfRound() {
-        if(this.currentHP == 0) {
-            System.out.println("Le joueur est KO !");
-            return;
-        }
-        if(this.currentHP < this.maxHP/2) {
-            heal();
-        }
-        if(this.currentHP > this.maxHP) {
-            this.currentHP = this.maxHP;
-        }
-    }
-
-    private void levelUp() {
-        Random random = new Random();
-        this.addObjectInventory(objectList[random.nextInt(objectList.length)]);
-
-        HashMap<String, Integer> newAbilities = this.avatarClass.getAbilitiesByLevel(retrieveLevel());
-        this.abilities.putAll(newAbilities);
-    }
-
     public int getXp() {
         return this.xp;
     }
@@ -106,47 +75,73 @@ public class Player {
         return false;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    /* ====================== HP ====================== */
+    public void updateEndOfRound() {
+        if(this.currentHP == 0) {
+            System.out.println("Le joueur est KO !");
+            return;
+        }
+        if(this.currentHP < this.maxHP/2) {
+            heal();
+        }
+        if(this.currentHP > this.maxHP) {
+            this.currentHP = this.maxHP;
+        }
     }
-
-    public String getAvatarName() {
-        return avatarName;
-    }
-
-    public Integer getMoney() {
-        return money;
-    }
-
     public void setMaxHP(int maxHP) {
         this.maxHP = maxHP;
     }
-
     public int getCurrentHP() {
         return currentHP;
     }
-
     public void setCurrentHP(int currentHP) {
         this.currentHP = currentHP;
     }
 
-    public void heal() {
-        this.currentHP += this.avatarClass.calculateHealthRegeneration(this);
-    }
-
-    public HashMap<String, Integer> getAbilities() {
-        return abilities;
-    }
-
+    /* ====================== INVENTORY ====================== */
     public ArrayList<String> getInventory() {
         return inventory;
     }
-
     public void setInventory(ArrayList<String> inventory) {
         this.inventory = inventory;
     }
-
     public void addObjectInventory(String objectName) {
         this.inventory.add(objectName);
+    }
+
+    /* ====================== OTHER GETTERS ====================== */
+    public String getPlayerName() {
+        return playerName;
+    }
+    public String getAvatarName() {
+        return avatarName;
+    }
+    public HashMap<String, Integer> getAbilities() {
+        return abilities;
+    }
+    public AvatarClass getAvatarClass () {
+        return this.avatarClass;
+    }
+
+    /* ====================== PRIVATE METHODS ====================== */
+    private int retrieveLevelFromXp(int currentLvl, int xpForCurrentLvl) {
+        int xpNextLvl = currentLvl * 10 + (currentLvl+1)*xpForCurrentLvl/4; // Formule to calculate the xp needed for lvlUp
+
+        if (this.xp < xpNextLvl || currentLvl == MAXIMUM_LEVEL) {
+            return currentLvl;
+        }
+        return retrieveLevelFromXp(currentLvl+1, xpNextLvl);
+    }
+
+    private void levelUp() {
+        Random random = new Random();
+        this.addObjectInventory(objectList[random.nextInt(objectList.length)]);
+
+        HashMap<String, Integer> newAbilities = this.avatarClass.getAbilitiesByLevel(retrieveLevel());
+        this.abilities.putAll(newAbilities);
+    }
+
+    private void heal() {
+        this.currentHP += this.avatarClass.calculateHealthRegeneration(this);
     }
 }

@@ -12,12 +12,11 @@ public abstract class AvatarClassAbstract {
         this.abilitiesByLevel = initializeAbilities();
     }
 
-    protected abstract HashMap<Integer, HashMap<String, Integer>> initializeAbilities();
-
-    public abstract int calculateHealthRegeneration(Player player);
-
-
     public HashMap<String, Integer> getAbilitiesByLevel(int level) {
         return new HashMap<>(abilitiesByLevel.getOrDefault(level, new HashMap<>()));
     }
+
+    protected abstract HashMap<Integer, HashMap<String, Integer>> initializeAbilities();
+
+    public abstract int calculateHealthRegeneration(Player player);
 }

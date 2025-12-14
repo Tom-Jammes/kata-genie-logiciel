@@ -7,17 +7,17 @@ public class Display {
     public static String displayPlayer(Player player) {
         StringBuilder display = new StringBuilder();
 
-        /* Header */
+        /* ====================== GLOBAL INFOS ====================== */
         display.append("Joueur ").append(player.getAvatarName())
                 .append(" joué par ").append(player.getPlayerName());
         display.append("\n");
 
-        /* Stats */
+        /* ====================== XP STATS ====================== */
         display.append("Niveau : ").append(player.retrieveLevel())
                 .append(" (XP totale : ").append(player.getXp()).append(")");
         display.append("\n");
 
-        /* Capacities */
+        /* ====================== ABILITIES ====================== */
         display.append("\n");
         display.append("Capacités :"); // Abilities sorted by name
         player.getAbilities().entrySet().stream()
@@ -28,7 +28,7 @@ public class Display {
                 });
         display.append("\n");
 
-        /* Inventory */
+        /* ====================== INVENTORY ====================== */
         display.append("\n");
         display.append("Inventaire :"); // Inventory sorted by object's name
         player.getInventory().stream()
