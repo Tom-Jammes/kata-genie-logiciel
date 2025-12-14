@@ -18,14 +18,14 @@ public class Player {
     };
     private final int MAXIMUM_LEVEL = 5;
 
-    private String playerName;
-    private String avatarName;
+    private final String playerName;
+    private final String avatarName;
     private final AvatarClass avatarClass;
     private int money;
     private int maxHP;
     private int currentHP;
     private int xp;
-    private HashMap<String, Integer> abilities;
+    private final HashMap<String, Integer> abilities;
     private ArrayList<String> inventory;
 
     public Player(String playerName, String avatarName, AvatarClass avatarClass, int money, ArrayList<String> inventory) {
