@@ -160,8 +160,6 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("addXp - ajout d'XP sans changement de niveau")
         void testAddXpMultipleTimesWithoutLevelUp() {
-            archer.xp = 0;
-
             UpdatePlayer.addXp(archer, 2);
             assertEquals(2, archer.xp);
 
@@ -185,8 +183,6 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("addXp - ajout d'XP avec level up")
         void testAddXpLevelUpFrom1To2() {
-            archer.xp = 0;
-
             boolean leveledUp = UpdatePlayer.addXp(archer, 10);
 
             assertTrue(leveledUp);
@@ -201,7 +197,6 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("LevelUp - ajout d'un objet aléatoire lors du level up")
         void testAddsRandomObjectOnLevelUp() {
-            archer.xp = 0;
             archer.inventory.clear();
 
             UpdatePlayer.addXp(archer, 10);
@@ -213,8 +208,6 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("LevelUp - mise à jour des niveaux des capacités lors du level up")
         void testUpdatesAbilitiesLevelWhenLevelUp() {
-            archer.xp = 0;
-
             assertEquals(1, archer.retrieveLevel());
             assertEquals(1, archer.abilities.get("CHA"));
             assertNull(archer.abilities.get("DEF"));
@@ -229,8 +222,6 @@ public class UpdatePlayerTest {
         @Test
         @DisplayName("LevelUp - Player garde les capacités du niveau précédent quand levelUp")
         void testKeepPreviousAbilitiesWhenLevelUp() {
-            archer.xp = 0;
-
             assertEquals(1, archer.retrieveLevel());
             assertEquals(1, archer.abilities.get("INT"));
             assertEquals(3, archer.abilities.get("ATK"));
@@ -312,7 +303,6 @@ public class UpdatePlayerTest {
         void testMajFinDeTourAdventurerLowHealthLowLevel() {
             adventurer.healthpoints = 100;
             adventurer.currenthealthpoints = 40;
-            adventurer.xp = 0; // niveau 1
 
             UpdatePlayer.majFinDeTour(adventurer);
 
