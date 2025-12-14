@@ -1,7 +1,7 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.Test;
-import re.forestier.edu.rpg.Affichage;
+import re.forestier.edu.rpg.Display;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.avatarclasses.AvatarClass;
 
@@ -17,6 +17,6 @@ public class DisplayTest {
         player.addXp(20);
         player.setInventory(new ArrayList<>());
 
-        verify(Affichage.afficherJoueur(player));
+        verify(Display.displayPlayer(player));
     }
 }

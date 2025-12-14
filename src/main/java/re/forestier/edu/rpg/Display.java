@@ -2,9 +2,9 @@ package re.forestier.edu.rpg;
 
 import java.util.Map;
 
-public class Affichage {
+public class Display {
 
-    public static String afficherJoueur(Player player) {
+    public static String displayPlayer(Player player) {
         StringBuilder display = new StringBuilder();
 
         /* Header */

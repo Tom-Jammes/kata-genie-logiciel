@@ -1,5 +1,5 @@
 package re.forestier.edu;
-import re.forestier.edu.rpg.Affichage;
+import re.forestier.edu.rpg.Display;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.avatarclasses.AvatarClass;
 
@@ -11,9 +11,9 @@ public class Main {
         firstPlayer.addMoney(400);
 
         firstPlayer.addXp(15);
-        System.out.println(Affichage.afficherJoueur(firstPlayer));
+        System.out.println(Display.displayPlayer(firstPlayer));
         System.out.println("------------------");
         firstPlayer.addXp(20);
-        System.out.println(Affichage.afficherJoueur(firstPlayer));
+        System.out.println(Display.displayPlayer(firstPlayer));
     }
 }
