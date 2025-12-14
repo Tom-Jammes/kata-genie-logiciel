@@ -19,31 +19,31 @@ public class Adventurer extends AvatarClassAbstract {
     protected HashMap<Integer, HashMap<String, Integer>> initializeAbilities() {
         HashMap<Integer, HashMap<String, Integer>> abilities = new HashMap<>();
 
-        HashMap<String, Integer> adventurerLevel1 = new HashMap<>();
-        adventurerLevel1.put("INT", 1);
-        adventurerLevel1.put("DEF", 1);
-        adventurerLevel1.put("ATK", 3);
-        adventurerLevel1.put("CHA", 2);
-        abilities.put(1, adventurerLevel1);
+        HashMap<String, Integer> level1 = new HashMap<>();
+        level1.put("INT", 1);
+        level1.put("DEF", 1);
+        level1.put("ATK", 3);
+        level1.put("CHA", 2);
+        abilities.put(1, level1);
 
-        HashMap<String, Integer> adventurerLevel2 = new HashMap<>();
-        adventurerLevel1.put("INT", 2);
-        adventurerLevel1.put("CHA", 3);
-        abilities.put(2, adventurerLevel2);
+        HashMap<String, Integer> level2 = new HashMap<>();
+        level1.put("INT", 2);
+        level1.put("CHA", 3);
+        abilities.put(2, level2);
 
-        HashMap<String, Integer> adventurerLevel3 = new HashMap<>();
-        adventurerLevel3.put("ATK", 5);
-        adventurerLevel3.put("ALC", 1);
-        abilities.put(3, adventurerLevel3);
+        HashMap<String, Integer> level3 = new HashMap<>();
+        level3.put("ATK", 5);
+        level3.put("ALC", 1);
+        abilities.put(3, level3);
 
-        HashMap<String, Integer> adventurerLevel4 = new HashMap<>();
-        adventurerLevel4.put("DEF", 3);
-        abilities.put(4, adventurerLevel4);
+        HashMap<String, Integer> level4 = new HashMap<>();
+        level4.put("DEF", 3);
+        abilities.put(4, level4);
 
-        HashMap<String, Integer> adventurerLevel5 = new HashMap<>();
-        adventurerLevel5.put("VIS", 1);
-        adventurerLevel5.put("DEF", 4);
-        abilities.put(5, adventurerLevel5);
+        HashMap<String, Integer> level5 = new HashMap<>();
+        level5.put("VIS", 1);
+        level5.put("DEF", 4);
+        abilities.put(5, level5);
 
         return abilities;
     }
