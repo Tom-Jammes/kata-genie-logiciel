@@ -74,7 +74,6 @@ public class Player {
     /* ====================== HP ====================== */
     public void updateEndOfRound() {
         if(this.currentHP == 0) {
-            System.out.println("Le joueur est KO !");
             return;
         }
         if(this.currentHP < this.maxHP/2) {
