@@ -22,17 +22,18 @@ public class Player {
     private final String avatarName;
     private final AvatarClass avatarClass;
     private int money;
-    private int maxHP;
+    private final int maxHP;
     private int currentHP;
     private int xp;
     private final HashMap<String, Integer> abilities;
     private ArrayList<String> inventory;
 
-    public Player(String playerName, String avatarName, AvatarClass avatarClass, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, AvatarClass avatarClass, int maxHP, int money, ArrayList<String> inventory) {
         this.avatarClass = avatarClass;
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.money = money;
+        this.maxHP = maxHP;
         this.inventory = inventory;
         this.abilities = this.avatarClass.getAbilitiesByLevel(1);
     }
@@ -87,9 +88,6 @@ public class Player {
         if(this.currentHP > this.maxHP) {
             this.currentHP = this.maxHP;
         }
-    }
-    public void setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
     }
     public int getCurrentHP() {
         return currentHP;

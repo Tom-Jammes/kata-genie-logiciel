@@ -13,7 +13,7 @@ public class DisplayTest {
 
     @Test
     void testDisplayPlayerAsString() {
-        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 200, new ArrayList<>());
+        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, new ArrayList<>());
         player.addXp(20);
         player.setInventory(new ArrayList<>());
 

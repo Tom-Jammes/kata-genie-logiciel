@@ -26,9 +26,9 @@ public class PlayerTest {
         notEmptyInventory.add("Sword");
         notEmptyInventory.add("Potion");
 
-        archer = new Player("John", "Robin", AvatarClass.ARCHER, 100, new ArrayList<>());
-        adventurer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100, new ArrayList<>());
-        dwarf = new Player("Bob", "Gimli", AvatarClass.DWARF, 100, notEmptyInventory);
+        archer = new Player("John", "Robin", AvatarClass.ARCHER, 100,100, new ArrayList<>());
+        adventurer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100,100, new ArrayList<>());
+        dwarf = new Player("Bob", "Gimli", AvatarClass.DWARF, 100,100, notEmptyInventory);
     }
 
     @Nested
@@ -36,7 +36,7 @@ public class PlayerTest {
         @Test
         @DisplayName("Constructeur avec classe valide")
         void testConstructorWithValidArcherClass() {
-            Player archerPlayer = new Player("John", "Robin", AvatarClass.ARCHER, 100, notEmptyInventory);
+            Player archerPlayer = new Player("John", "Robin", AvatarClass.ARCHER, 100, 100, notEmptyInventory);
 
             assertNotNull(archerPlayer);
             assertEquals("John", archerPlayer.getPlayerName());
@@ -46,7 +46,7 @@ public class PlayerTest {
             assertEquals(notEmptyInventory, archerPlayer.getInventory());
             assertNotNull(archerPlayer.getAbilities());
 
-            Player adventurerPlayer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 200, notEmptyInventory);
+            Player adventurerPlayer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100, 200, notEmptyInventory);
 
             assertNotNull(adventurerPlayer);
             assertEquals("Alice", adventurerPlayer.getPlayerName());
@@ -59,14 +59,14 @@ public class PlayerTest {
         @DisplayName("Impossible to create a player with an invalid avatarClass")
         void mustNotCreateAPlayerWithAnInvalidAvatarClass() {
             assertThrows(IllegalArgumentException.class, () -> {
-                new Player("Alice", "Alice the skeleton", AvatarClass.valueOf("InvalidAvatarClass"), 100, notEmptyInventory);
+                new Player("Alice", "Alice the skeleton", AvatarClass.valueOf("InvalidAvatarClass"), 100, 100, notEmptyInventory);
             });
         }
 
         @Test
         @DisplayName("Constructeur avec argent à zéro")
         void testConstructorWithZeroMoney() {
-            Player p = new Player("Poor", "Avatar", AvatarClass.ARCHER, 0, notEmptyInventory);
+            Player p = new Player("Poor", "Avatar", AvatarClass.ARCHER, 100, 0, notEmptyInventory);
 
             assertEquals(0, p.getMoney());
         }
@@ -107,7 +107,7 @@ public class PlayerTest {
         @Test
         @DisplayName("removeMoney - montant négatif provoque une exception")
         void testRemoveMoneyNegativeResult() {
-            Player p = new Player("John", "Avatar", AvatarClass.ARCHER, 50, notEmptyInventory);
+            Player p = new Player("John", "Avatar", AvatarClass.ARCHER, 100, 50, notEmptyInventory);
 
             try {
                 p.removeMoney(100);
@@ -321,7 +321,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - joueur KO (HP = 0)")
         void testUpdateEndOfRoundPlayerKO() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(0);
 
             archer.updateEndOfRound();
@@ -333,7 +332,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - ARCHER avec HP < 50% sans Magic Bow")
         void testUpdateEndOfRoundArcherLowHealthNoMagicBow() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(40);
 
             archer.updateEndOfRound();
@@ -344,7 +342,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - ARCHER avec HP < 50% avec Magic Bow")
         void testUpdateEndOfRoundArcherLowHealthWithMagicBow() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(40);
             archer.addObjectInventory("Magic Bow");
 
@@ -357,7 +354,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - DWARF avec HP < 50% sans Holy Elixir")
         void testUpdateEndOfRoundDwarfLowHealthNoElixir() {
-            dwarf.setMaxHP(100);
             dwarf.setCurrentHP(40);
 
             dwarf.updateEndOfRound();
@@ -368,7 +364,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - DWARF avec HP < 50% avec Holy Elixir")
         void testUpdateEndOfRoundDwarfLowHealthWithElixir() {
-            dwarf.setMaxHP(100);
             dwarf.setCurrentHP(40);
             dwarf.addObjectInventory("Holy Elixir");
 
@@ -381,7 +376,6 @@ public class PlayerTest {
         @Test
         @DisplayName("majFinDeTour - ADVENTURER avec HP < 50% et niveau < 3")
         void testMajFinDeTourAdventurerLowHealthLowLevel() {
-            adventurer.setMaxHP(100);
             adventurer.setCurrentHP(40);
 
             adventurer.updateEndOfRound();
@@ -393,7 +387,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - ADVENTURER avec HP < 50% et niveau >= 3")
         void testUpdateEndOfRoundAdventurerLowHealthHighLevel() {
-            adventurer.setMaxHP(100);
             adventurer.setCurrentHP(40);
             adventurer.setXp(27); // niveau 3
 
@@ -406,7 +399,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - joueur avec HP >= 50% et < max")
         void testUpdateEndOfRoundPlayerHealthAboveHalf() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(60);
 
             archer.updateEndOfRound();
@@ -418,7 +410,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - joueur avec HP = max")
         void testUpdateEndOfRoundPlayerFullHealth() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(100);
 
             archer.updateEndOfRound();
@@ -429,7 +420,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - ARCHER avec HP exactement à 50%")
         void testUpdateEndOfRoundArcherExactlyHalfHealth() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(50);
 
             archer.updateEndOfRound();
@@ -441,7 +431,6 @@ public class PlayerTest {
         @Test
         @DisplayName("majFinDeTour - ARCHER avec HP supérieurs à 100%")
         void testMajFinDeTourArcherTooHealed() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(150);
 
             archer.updateEndOfRound();
@@ -453,7 +442,6 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - ARCHER avec HP juste en dessous de 50%")
         void testUpdateEndOfRoundArcherJustBelowHalfHealth() {
-            archer.setMaxHP(100);
             archer.setCurrentHP(49);
 
             archer.updateEndOfRound();
