@@ -41,7 +41,7 @@ public class Player {
         return this.avatarClass;
     }
 
-    public void removeMoney(int amount) throws IllegalArgumentException {
+    public void removeMoney(int amount) {
         if (money - amount < 0) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
