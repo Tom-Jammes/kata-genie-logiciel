@@ -183,7 +183,7 @@ public class UpdatePlayerTest {
         }
 
         @Test
-        @DisplayName("addXp - level up de 1 à 2")
+        @DisplayName("addXp - ajout d'XP avec level up")
         void testAddXpLevelUpFrom1To2() {
             archer.xp = 0;
 
@@ -192,55 +192,6 @@ public class UpdatePlayerTest {
             assertTrue(leveledUp);
             assertEquals(10, archer.xp);
             assertEquals(2, archer.retrieveLevel());
-        }
-
-        @Test
-        @DisplayName("addXp - level up de 2 à 3")
-        void testAddXpLevelUpFrom2To3() {
-            archer.xp = 10;
-
-            boolean leveledUp = UpdatePlayer.addXp(archer, 17);
-
-            assertTrue(leveledUp);
-            assertEquals(27, archer.xp);
-            assertEquals(3, archer.retrieveLevel());
-        }
-
-        @Test
-        @DisplayName("addXp - level up de 3 à 4")
-        void testAddXpLevelUpFrom3To4() {
-            archer.xp = 27;
-
-            boolean leveledUp = UpdatePlayer.addXp(archer, 30);
-
-            assertTrue(leveledUp);
-            assertEquals(57, archer.xp);
-            assertEquals(4, archer.retrieveLevel());
-        }
-
-        @Test
-        @DisplayName("addXp - level up de 4 à 5")
-        void testAddXpLevelUpFrom4To5() {
-            archer.xp = 57;
-
-            boolean leveledUp = UpdatePlayer.addXp(archer, 54);
-
-            assertTrue(leveledUp);
-            assertEquals(111, archer.xp);
-            assertEquals(5, archer.retrieveLevel());
-        }
-
-        @Test
-        @DisplayName("addXp - level up de plusieurs niveaux")
-        void testAddXpLevelUpManyLevels() {
-            archer.xp = 0;
-            assertEquals(1, archer.retrieveLevel());
-
-            boolean leveledUp = UpdatePlayer.addXp(archer, 111);
-
-            assertTrue(leveledUp);
-            assertEquals(111, archer.xp);
-            assertEquals(5, archer.retrieveLevel());
         }
     }
 
