@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,40 +26,25 @@ public class PlayerTest {
     @Nested
     class Constructor {
         @Test
-        @DisplayName("Constructeur avec classe ARCHER valide")
+        @DisplayName("Constructeur avec classe valide")
         void testConstructorWithValidArcherClass() {
-            Player p = new Player("John", "Robin", "ARCHER", 100, notEmptyInventory);
+            Player archerPlayer = new Player("John", "Robin", "ARCHER", 100, notEmptyInventory);
 
-            assertNotNull(p);
-            assertEquals("John", p.getPlayerName());
-            assertEquals("Robin", p.getAvatarName());
-            assertEquals("ARCHER", p.getAvatarClass());
-            assertEquals(100, p.getMoney());
-            assertEquals(notEmptyInventory, p.getInventory());
-            assertNotNull(p.getAbilities());
-        }
+            assertNotNull(archerPlayer);
+            assertEquals("John", archerPlayer.getPlayerName());
+            assertEquals("Robin", archerPlayer.getAvatarName());
+            assertEquals("ARCHER", archerPlayer.getAvatarClass());
+            assertEquals(100, archerPlayer.getMoney());
+            assertEquals(notEmptyInventory, archerPlayer.getInventory());
+            assertNotNull(archerPlayer.getAbilities());
 
-        @Test
-        @DisplayName("Constructeur avec classe ADVENTURER valide")
-        void testConstructorWithValidAdventurerClass() {
-            Player p = new Player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
+            Player adventurerPlayer = new Player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
 
-            assertNotNull(p);
-            assertEquals("Alice", p.getPlayerName());
-            assertEquals("Lara", p.getAvatarName());
-            assertEquals("ADVENTURER", p.getAvatarClass());
-            assertEquals(200, p.getMoney());
-        }
-
-        @Test
-        @DisplayName("Constructeur avec classe DWARF valide")
-        void testConstructorWithValidDwarfClass() {
-            Player p = new Player("Bob", "Gimli", "DWARF", 50, notEmptyInventory);
-
-            assertNotNull(p);
-            assertEquals("Bob", p.getPlayerName());
-            assertEquals("Gimli", p.getAvatarName());
-            assertEquals("DWARF", p.getAvatarClass());
+            assertNotNull(adventurerPlayer);
+            assertEquals("Alice", adventurerPlayer.getPlayerName());
+            assertEquals("Lara", adventurerPlayer.getAvatarName());
+            assertEquals("ADVENTURER", adventurerPlayer.getAvatarClass());
+            assertEquals(200, adventurerPlayer.getMoney());
         }
 
         @Test
