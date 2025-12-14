@@ -17,9 +17,9 @@ public class Display {
                 .append(" (XP totale : ").append(player.getXp()).append(")");
         display.append("\n");
 
-        /* ====================== ABILITIES ====================== */
+        /* ====================== ABILITIES (sorted alphabetically) ====================== */
         display.append("\n");
-        display.append("Capacités :"); // Abilities sorted by name
+        display.append("Capacités :");
         player.getAbilities().entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> {
@@ -28,9 +28,9 @@ public class Display {
                 });
         display.append("\n");
 
-        /* ====================== INVENTORY ====================== */
+        /* ====================== INVENTORY (sorted alphabetically) ====================== */
         display.append("\n");
-        display.append("Inventaire :"); // Inventory sorted by object's name
+        display.append("Inventaire :");
         player.getInventory().stream()
                 .sorted()
                 .forEach(name -> {
