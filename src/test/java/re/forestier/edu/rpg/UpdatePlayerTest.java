@@ -36,6 +36,7 @@ public class UpdatePlayerTest {
                 assertEquals(1, abilities.get("DEF"));
                 assertEquals(3, abilities.get("ATK"));
 //                assertEquals(2, abilities.get("CHA"));  IMPOSSIBLE DUE TO THE BUG
+                assertEquals(4, abilities.size());
             }
 
 //            IMPOSSIBLE DUE TO THE BUG
@@ -45,6 +46,7 @@ public class UpdatePlayerTest {
 //                HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ADVENTURER").get(2);
 //                assertEquals(2, abilities.get("INT"));
 //                assertEquals(3, abilities.get("CHA"));
+//                assertEquals(2, abilities.size());
 //            }
 
             @Test
@@ -53,6 +55,7 @@ public class UpdatePlayerTest {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ADVENTURER").get(3);
                 assertEquals(1, abilities.get("ALC"));
                 assertEquals(5, abilities.get("ATK"));
+                assertEquals(2, abilities.size());
             }
 
             @Test
@@ -60,6 +63,7 @@ public class UpdatePlayerTest {
             void testAbilitiesAdventurerLevel4() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ADVENTURER").get(4);
                 assertEquals(3, abilities.get("DEF"));
+                assertEquals(1, abilities.size());
             }
 
             @Test
@@ -68,6 +72,7 @@ public class UpdatePlayerTest {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ADVENTURER").get(5);
                 assertEquals(1, abilities.get("VIS"));
                 assertEquals(4, abilities.get("DEF"));
+                assertEquals(2, abilities.size());
             }
         }
 
@@ -80,6 +85,7 @@ public class UpdatePlayerTest {
                 assertEquals(4, abilities.get("ALC"));
                 assertEquals(1, abilities.get("INT"));
                 assertEquals(3, abilities.get("ATK"));
+                assertEquals(3, abilities.size());
             }
 
             @Test
@@ -88,6 +94,7 @@ public class UpdatePlayerTest {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("DWARF").get(2);
                 assertEquals(1, abilities.get("DEF"));
                 assertEquals(5, abilities.get("ALC"));
+                assertEquals(2, abilities.size());
             }
 
             @Test
@@ -95,6 +102,7 @@ public class UpdatePlayerTest {
             void testAbilitiesDwarfLevel3() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("DWARF").get(3);
                 assertEquals(4, abilities.get("ATK"));
+                assertEquals(1, abilities.size());
             }
 
             @Test
@@ -102,6 +110,7 @@ public class UpdatePlayerTest {
             void testAbilitiesDwarfLevel4() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("DWARF").get(4);
                 assertEquals(2, abilities.get("DEF"));
+                assertEquals(1, abilities.size());
             }
 
             @Test
@@ -109,6 +118,7 @@ public class UpdatePlayerTest {
             void testAbilitiesDwarfLevel5() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("DWARF").get(5);
                 assertEquals(1, abilities.get("CHA"));
+                assertEquals(1, abilities.size());
             }
         }
 
@@ -122,6 +132,7 @@ public class UpdatePlayerTest {
                 assertEquals(3, abilities.get("ATK"));
                 assertEquals(1, abilities.get("CHA"));
                 assertEquals(3, abilities.get("VIS"));
+                assertEquals(4, abilities.size());
             }
 
             @Test
@@ -130,6 +141,7 @@ public class UpdatePlayerTest {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ARCHER").get(2);
                 assertEquals(1, abilities.get("DEF"));
                 assertEquals(2, abilities.get("CHA"));
+                assertEquals(2, abilities.size());
             }
 
             @Test
@@ -137,6 +149,7 @@ public class UpdatePlayerTest {
             void testAbilitiesArcherLevel3() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ARCHER").get(3);
                 assertEquals(3, abilities.get("ATK"));
+                assertEquals(1, abilities.size());
             }
 
             @Test
@@ -144,6 +157,7 @@ public class UpdatePlayerTest {
             void testAbilitiesArcherLevel4() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ARCHER").get(4);
                 assertEquals(2, abilities.get("DEF"));
+                assertEquals(1, abilities.size());
             }
 
             @Test
@@ -151,6 +165,7 @@ public class UpdatePlayerTest {
             void testAbilitiesArcherLevel5() {
                 HashMap<String, Integer> abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get("ARCHER").get(5);
                 assertEquals(4, abilities.get("ATK"));
+                assertEquals(1, abilities.size());
             }
         }
     }
