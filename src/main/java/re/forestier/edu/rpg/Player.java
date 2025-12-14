@@ -28,11 +28,8 @@ public class Player {
     private HashMap<String, Integer> abilities;
     private ArrayList<String> inventory;
 
-    public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
-        this.avatarClass = AvatarClass.fromString(avatarClassName);
-        if (this.avatarClass == null) {
-            return;
-        }
+    public Player(String playerName, String avatarName, AvatarClass avatarClass, int money, ArrayList<String> inventory) {
+        this.avatarClass = avatarClass;
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.money = money;
@@ -40,8 +37,8 @@ public class Player {
         this.abilities = this.avatarClass.getAbilitiesByLevel(1);
     }
 
-    public String getAvatarClass () {
-        return this.avatarClass == null ? null : this.avatarClass.toString();
+    public AvatarClass getAvatarClass () {
+        return this.avatarClass;
     }
 
     public void removeMoney(int amount) throws IllegalArgumentException {

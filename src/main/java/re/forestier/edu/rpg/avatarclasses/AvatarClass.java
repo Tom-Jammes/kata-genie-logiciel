@@ -15,14 +15,6 @@ public enum AvatarClass {
         this.avatarClass = avatarClass;
     }
 
-    public static AvatarClass fromString(String className) {
-        try {
-            return valueOf(className);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-    }
-
     public int calculateHealthRegeneration(Player p) {
         return avatarClass.calculateHealthRegeneration(p);
     }

@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTest {
 
-    private ArrayList<String> emptyInventory;
     private ArrayList<String> notEmptyInventory;
 
     private Player archer;
@@ -23,14 +22,13 @@ public class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        emptyInventory = new ArrayList<>();
         notEmptyInventory = new ArrayList<>();
         notEmptyInventory.add("Sword");
         notEmptyInventory.add("Potion");
 
-        archer = new Player("John", "Robin", "ARCHER", 100, emptyInventory);
-        adventurer = new Player("Alice", "Lara", "ADVENTURER", 100, emptyInventory);
-        dwarf = new Player("Bob", "Gimli", "DWARF", 100, emptyInventory);
+        archer = new Player("John", "Robin", AvatarClass.ARCHER, 100, new ArrayList<>());
+        adventurer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100, new ArrayList<>());
+        dwarf = new Player("Bob", "Gimli", AvatarClass.DWARF, 100, notEmptyInventory);
     }
 
     @Nested
@@ -38,39 +36,37 @@ public class PlayerTest {
         @Test
         @DisplayName("Constructeur avec classe valide")
         void testConstructorWithValidArcherClass() {
-            Player archerPlayer = new Player("John", "Robin", "ARCHER", 100, notEmptyInventory);
+            Player archerPlayer = new Player("John", "Robin", AvatarClass.ARCHER, 100, notEmptyInventory);
 
             assertNotNull(archerPlayer);
             assertEquals("John", archerPlayer.getPlayerName());
             assertEquals("Robin", archerPlayer.getAvatarName());
-            assertEquals("ARCHER", archerPlayer.getAvatarClass());
+            assertEquals(AvatarClass.ARCHER, archerPlayer.getAvatarClass());
             assertEquals(100, archerPlayer.getMoney());
             assertEquals(notEmptyInventory, archerPlayer.getInventory());
             assertNotNull(archerPlayer.getAbilities());
 
-            Player adventurerPlayer = new Player("Alice", "Lara", "ADVENTURER", 200, notEmptyInventory);
+            Player adventurerPlayer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 200, notEmptyInventory);
 
             assertNotNull(adventurerPlayer);
             assertEquals("Alice", adventurerPlayer.getPlayerName());
             assertEquals("Lara", adventurerPlayer.getAvatarName());
-            assertEquals("ADVENTURER", adventurerPlayer.getAvatarClass());
+            assertEquals(AvatarClass.ADVENTURER, adventurerPlayer.getAvatarClass());
             assertEquals(200, adventurerPlayer.getMoney());
         }
 
         @Test
         @DisplayName("Impossible to create a player with an invalid avatarClass")
         void mustNotCreateAPlayerWithAnInvalidAvatarClass() {
-            Player p = new Player("Alice", "Alice the skeleton", "InvalidAvatarClass", 100, notEmptyInventory);
-            assertNull(p.getPlayerName());
-            assertNull(p.getAvatarName());
-            assertNull(p.getAvatarClass());
-            assertNull(p.getMoney());
+            assertThrows(IllegalArgumentException.class, () -> {
+                new Player("Alice", "Alice the skeleton", AvatarClass.valueOf("InvalidAvatarClass"), 100, notEmptyInventory);
+            });
         }
 
         @Test
         @DisplayName("Constructeur avec argent à zéro")
         void testConstructorWithZeroMoney() {
-            Player p = new Player("Poor", "Avatar", "ARCHER", 0, notEmptyInventory);
+            Player p = new Player("Poor", "Avatar", AvatarClass.ARCHER, 0, notEmptyInventory);
 
             assertEquals(0, p.getMoney());
         }
@@ -78,21 +74,17 @@ public class PlayerTest {
         @Test
         @DisplayName("Constructeur avec inventaire vide")
         void testConstructorWithEmptyInventory() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, emptyInventory);
-
-            assertNotNull(p.getInventory());
-            assertEquals(0, p.getInventory().size());
+            assertNotNull(archer.getInventory());
+            assertEquals(0, archer.getInventory().size());
         }
 
         @Test
         @DisplayName("Constructeur avec inventaire non vide")
         void testConstructorWithNotEmptyInventory() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            assertNotNull(p.getInventory());
-            assertEquals(2, p.getInventory().size());
-            assertEquals("Sword", p.getInventory().get(0));
-            assertEquals("Potion", p.getInventory().get(1));
+            assertNotNull(dwarf.getInventory());
+            assertEquals(2, dwarf.getInventory().size());
+            assertEquals("Sword", dwarf.getInventory().get(0));
+            assertEquals("Potion", dwarf.getInventory().get(1));
         }
     }
 
@@ -101,27 +93,21 @@ public class PlayerTest {
         @Test
         @DisplayName("removeMoney - retrait valide")
         void testRemoveMoneyValid() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            p.removeMoney(50);
-
-            assertEquals(50, p.getMoney());
+            archer.removeMoney(50);
+            assertEquals(50, archer.getMoney());
         }
 
         @Test
         @DisplayName("removeMoney - retrait total")
         void testRemoveMoneyAll() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            p.removeMoney(100);
-
-            assertEquals(0, p.getMoney());
+            archer.removeMoney(100);
+            assertEquals(0, archer.getMoney());
         }
 
         @Test
         @DisplayName("removeMoney - montant négatif provoque une exception")
         void testRemoveMoneyNegativeResult() {
-            Player p = new Player("John", "Avatar", "ARCHER", 50, notEmptyInventory);
+            Player p = new Player("John", "Avatar", AvatarClass.ARCHER, 50, notEmptyInventory);
 
             try {
                 p.removeMoney(100);
@@ -135,43 +121,32 @@ public class PlayerTest {
         @Test
         @DisplayName("removeMoney - retrait de zéro")
         void testRemoveMoneyZero() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            p.removeMoney(0);
-
-            assertEquals(100, p.getMoney());
+            archer.removeMoney(0);
+            assertEquals(100, archer.getMoney());
         }
 
         @Test
         @DisplayName("addMoney - ajout valide")
         void testAddMoneyValid() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            p.addMoney(50);
-
-            assertEquals(150, p.getMoney());
+            archer.addMoney(50);
+            assertEquals(150, archer.getMoney());
         }
 
         @Test
         @DisplayName("addMoney - ajout de zéro")
         void testAddMoneyZero() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            p.addMoney(0);
-
-            assertEquals(100, p.getMoney());
+            archer.addMoney(0);
+            assertEquals(100, archer.getMoney());
         }
 
         @Test
         @DisplayName("addMoney - multiple ajouts successifs")
         void testAddMoneyMultipleTimes() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
+            archer.addMoney(25);
+            archer.addMoney(25);
+            archer.addMoney(50);
 
-            p.addMoney(25);
-            p.addMoney(25);
-            p.addMoney(50);
-
-            assertEquals(200, p.getMoney());
+            assertEquals(200, archer.getMoney());
         }
     }
 
@@ -180,90 +155,70 @@ public class PlayerTest {
         @Test
         @DisplayName("retrieveLevel - niveau 1 avec XP = 0")
         void testRetrieveLevelOne_XpZero() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            assertEquals(1, p.retrieveLevel());
+            assertEquals(1, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 1 avec XP = 9")
         void testRetrieveLevelOne_XpNine() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(9);
-
-            assertEquals(1, p.retrieveLevel());
+            archer.setXp(9);
+            assertEquals(1, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 2 avec XP = 10")
         void testRetrieveLevelTwo_XpTen() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(10);
-
-            assertEquals(2, p.retrieveLevel());
+            archer.setXp(10);
+            assertEquals(2, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 2 avec XP = 26")
         void testRetrieveLevelTwo_XpTwentySix() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(26);
-
-            assertEquals(2, p.retrieveLevel());
+            archer.setXp(26);
+            assertEquals(2, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 3 avec XP = 27")
         void testRetrieveLevelThree_XpTwentySeven() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(27);
-
-            assertEquals(3, p.retrieveLevel());
+            archer.setXp(27);
+            assertEquals(3, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 3 avec XP = 56")
         void testRetrieveLevelThree_XpFiftySix() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(56);
-
-            assertEquals(3, p.retrieveLevel());
+            archer.setXp(56);
+            assertEquals(3, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 4 avec XP = 57")
         void testRetrieveLevelFour_XpFiftySeven() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(57);
-
-            assertEquals(4, p.retrieveLevel());
+            archer.setXp(57);
+            assertEquals(4, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 4 avec XP = 110")
         void testRetrieveLevelFour_XpOneHundredTen() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(110);
-
-            assertEquals(4, p.retrieveLevel());
+            archer.setXp(110);
+            assertEquals(4, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 5 avec XP = 111")
         void testRetrieveLevelFive_XpOneHundredEleven() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(111);
-
-            assertEquals(5, p.retrieveLevel());
+            archer.setXp(111);
+            assertEquals(5, archer.retrieveLevel());
         }
 
         @Test
         @DisplayName("retrieveLevel - niveau 5 avec XP très élevé")
         void testRetrieveLevelFive_HighXp() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(10000);
-
-            assertEquals(5, p.retrieveLevel());
+            archer.setXp(10000);
+            assertEquals(5, archer.retrieveLevel());
         }
     }
 
@@ -272,18 +227,15 @@ public class PlayerTest {
         @Test
         @DisplayName("getXp retourne la valeur correcte")
         void testGetXp() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-            p.setXp(50);
+            archer.setXp(50);
 
-            assertEquals(50, p.getXp());
+            assertEquals(50, archer.getXp());
         }
 
         @Test
         @DisplayName("getXp d'un nouveau joueur")
         void testGetXpZero() {
-            Player p = new Player("John", "Avatar", "ARCHER", 100, notEmptyInventory);
-
-            assertEquals(0, p.getXp());
+            assertEquals(0, archer.getXp());
         }
         @Test
         @DisplayName("addXp - ajout d'XP sans changement de niveau")
