@@ -21,7 +21,7 @@ public class Player {
     private String playerName;
     private String avatarName;
     private final AvatarClass avatarClass;
-    private Integer money;
+    private int money;
     private int maxHP;
     private int currentHP;
     private int xp;
