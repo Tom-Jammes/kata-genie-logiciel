@@ -40,4 +40,8 @@ public class Display {
 
         return display.toString();
     }
+
+    public static String displayMarkdown(Player player) {
+        return "";
+    }
 }
