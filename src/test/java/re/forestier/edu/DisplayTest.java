@@ -32,10 +32,10 @@ public class DisplayTest {
     }
 
     @Test
-    @DisplayName("Affichage en markdown du player")
+    @DisplayName("Affichage en markdown du player avec inventaire non vide")
     void testDisplayMarkdownPlayerNotEmptyInventory() {
-        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, new ArrayList<>());
-        player.addXp(30);
+        Player player = new Player("Tom", "Legolas", AvatarClass.ARCHER, 100, 200, new ArrayList<>());
+        player.addXp(20);
         player.setInventory(new ArrayList<>());
         player.addObjectInventory("Scroll of Stupidity");
 
