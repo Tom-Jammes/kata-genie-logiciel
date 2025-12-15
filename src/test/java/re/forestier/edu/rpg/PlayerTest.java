@@ -448,5 +448,17 @@ public class PlayerTest {
             // HP < healthpoints/2, donc soin
             assertEquals(50, archer.getCurrentHP());
         }
+
+        @Test
+        @DisplayName("UpdateEndOfRound - GOBLIN avec HP en dessous de 50%")
+        void testUpdateEndOfRoundGoblinBelowHalfHealth() {
+            Player goblin = new Player("Martin", "Garnuff", AvatarClass.GOBLIN, 100, 50, new ArrayList<>());
+            goblin.setCurrentHP(40);
+
+            goblin.updateEndOfRound();
+
+            // HP < healthpoints/2, donc soin
+            assertEquals(41, goblin.getCurrentHP());
+        }
     }
 }
