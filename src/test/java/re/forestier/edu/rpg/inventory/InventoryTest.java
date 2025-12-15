@@ -109,6 +109,19 @@ class InventoryTest {
         }
 
         @Test
+        @DisplayName("Lorsqu'on clear l'inventaire celui ci est vide")
+        void mustClearRemoveAllItem() {
+            Inventory inventory = new Inventory(5);
+
+            inventory.addItem(Item.MAGIC_BOW);
+            inventory.addItem(Item.HOLY_ELIXIR);
+            assertEquals(2, inventory.size());
+
+            inventory.clear();
+            assertEquals(0, inventory.size());
+        }
+
+        @Test
         @DisplayName("Impossible d'ajouter un item déjà dans l'inventaire")
         void cannotAddItemAlreadyInInventory() {
             Inventory inventory = new Inventory(5);
@@ -136,7 +149,7 @@ class InventoryTest {
             Inventory inventory = new Inventory(5);
 
             inventory.addItem(Item.MAGIC_BOW);
-            assertEquals(Item.MAGIC_BOW.getValue(), inventory.sellItem(Item.MAGIC_BOW));
+            assertEquals(Item.MAGIC_BOW.getValue(), inventory.sell(Item.MAGIC_BOW));
         }
 
         @Test
@@ -147,7 +160,7 @@ class InventoryTest {
             inventory.addItem(Item.MAGIC_BOW);
             assertEquals(1, inventory.size());
 
-            inventory.sellItem(Item.MAGIC_BOW);
+            inventory.sell(Item.MAGIC_BOW);
             assertEquals(0, inventory.size());
         }
 
@@ -157,6 +170,20 @@ class InventoryTest {
             Inventory inventory = new Inventory(5);
 
             assertThrows(ItemNotInInventoryException.class, () -> inventory.removedItem(Item.MAGIC_BOW));
+        }
+
+        @Test
+        @DisplayName("Possibilité de vendre tous les items d'un coup")
+        void canSellAllItems() {
+            Inventory inventory = new Inventory(5);
+
+            inventory.addItem(Item.MAGIC_BOW);
+            inventory.addItem(Item.HOLY_ELIXIR);
+            assertEquals(2, inventory.size());
+
+            int expectedValue = Item.MAGIC_BOW.getValue() + Item.HOLY_ELIXIR.getValue();
+            assertEquals(expectedValue, inventory.sellAll());
+            assertEquals(0, inventory.size());
         }
     }
 }

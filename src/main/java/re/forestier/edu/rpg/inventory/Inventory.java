@@ -52,14 +52,27 @@ public class Inventory {
         items.remove(item);
     }
 
+    public void clear() {
+        items.clear();
+    }
+
     public boolean contains(Item item) {
         return items.contains(item);
     }
 
-    public int sellItem(Item item) {
+    public int sell(Item item) {
         int itemValue = item.getValue();
         removedItem(item);
         return itemValue;
+    }
+
+    public int sellAll() {
+        int itemsValue = 0;
+        ArrayList<Item> itemsCopy = new ArrayList<>(items);
+        for (Item item : itemsCopy) {
+            itemsValue += sell(item);
+        }
+        return itemsValue;
     }
 
     /* ============== PRIVATE METHODS ============== */
