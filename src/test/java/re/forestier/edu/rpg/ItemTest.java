@@ -15,12 +15,12 @@ class ItemTest {
     void testAllItemsAreValid() {
         for (Item item : Item.values()) {
             assertNotNull(item.getName());
-            assertFalse(item.getName().isBlank(), "Item " + item.toString() + " has a blank name");
+            assertFalse(item.getName().isBlank(), "Item " + item + " has a blank name");
 
-            assertFalse(item.getDescription().isBlank(), "Item " + item.toString() + " has a blank description");
+            assertFalse(item.getDescription().isBlank(), "Item " + item + " has a blank description");
 
-            assertTrue(item.getValue() >= 0, "Item " + item.toString() + " has a negative value");
-            assertTrue(item.getWeight() >= 0,  "Item " + item.toString() + " has a negative weight");
+            assertTrue(item.getValue() >= 0, "Item " + item + " has a negative value");
+            assertTrue(item.getWeight() >= 0,  "Item " + item + " has a negative weight");
         }
     }
 
