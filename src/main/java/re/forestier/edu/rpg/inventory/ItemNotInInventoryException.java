@@ -1,4 +1,4 @@
-package re.forestier.edu.rpg;
+package re.forestier.edu.rpg.inventory;
 
 public class ItemNotInInventoryException extends RuntimeException {
     public ItemNotInInventoryException(String message) {

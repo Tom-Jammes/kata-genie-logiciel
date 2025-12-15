@@ -1,4 +1,4 @@
-package re.forestier.edu.rpg;
+package re.forestier.edu.rpg.inventory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
