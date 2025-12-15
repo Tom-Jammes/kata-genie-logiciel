@@ -1,6 +1,7 @@
 package re.forestier.edu.rpg.avatarclasses;
 
 import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.inventory.Item;
 
 import java.util.HashMap;
 
@@ -9,7 +10,7 @@ public class Archer extends AvatarClassAbstract {
     @Override
     public int calculateHealthRegeneration(Player player) {
         int regen = 1;
-        if(player.getInventory().contains("Magic Bow")) {
+        if(player.getInventory().contains(Item.MAGIC_BOW)) {
            regen += player.getCurrentHP()/8-1;
         }
         return regen;

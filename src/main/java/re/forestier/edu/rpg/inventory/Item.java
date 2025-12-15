@@ -69,6 +69,11 @@ public enum Item {
         this.weight = weight;
     }
 
+    public static Item random() {
+        Item[] items = values();
+        return items[(int) (Math.random() * items.length)];
+    }
+
     public String getName() {
         return name;
     }

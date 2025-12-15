@@ -31,7 +31,7 @@ public class Display {
         /* ====================== INVENTORY (sorted alphabetically) ====================== */
         display.append("\n");
         display.append("Inventaire :");
-        player.getInventory().stream()
+        player.getInventory().getItems().stream()
                 .sorted()
                 .forEach(name -> {
                     display.append("\n").append("   ").append(name);
@@ -67,13 +67,13 @@ public class Display {
 
         /* ====================== INVENTORY (sorted alphabetically) ====================== */
         display.append("## ").append("Inventaire :");
-        if (player.getInventory().isEmpty()) {
+        if (player.getInventory().size() == 0) {
             display.append("\n*(Aucun item)*");
         } else {
-            player.getInventory().stream()
+            player.getInventory().getItems().stream()
                     .sorted()
-                    .forEach(name -> {
-                        display.append("\n").append("* ").append(name);
+                    .forEach(item -> {
+                        display.append("\n").append("* ").append(item.getName());
                     });
         }
 

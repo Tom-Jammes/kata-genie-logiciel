@@ -5,15 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import re.forestier.edu.rpg.avatarclasses.AvatarClass;
-
-import java.util.ArrayList;
+import re.forestier.edu.rpg.inventory.Item;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTest {
-
-    private ArrayList<String> notEmptyInventory;
 
     private Player archer;
     private Player adventurer;
@@ -21,13 +18,9 @@ public class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        notEmptyInventory = new ArrayList<>();
-        notEmptyInventory.add("Sword");
-        notEmptyInventory.add("Potion");
-
-        archer = new Player("John", "Robin", AvatarClass.ARCHER, 100,100, new ArrayList<>());
-        adventurer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100,100, new ArrayList<>());
-        dwarf = new Player("Bob", "Gimli", AvatarClass.DWARF, 100,100, notEmptyInventory);
+        archer = new Player("John", "Robin", AvatarClass.ARCHER, 100,100, 5);
+        adventurer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100,100, 5);
+        dwarf = new Player("Bob", "Gimli", AvatarClass.DWARF, 100,100, 5);
     }
 
     @Nested
@@ -35,17 +28,16 @@ public class PlayerTest {
         @Test
         @DisplayName("Constructeur avec classe valide")
         void testConstructorWithValidArcherClass() {
-            Player archerPlayer = new Player("John", "Robin", AvatarClass.ARCHER, 100, 100, notEmptyInventory);
+            Player archerPlayer = new Player("John", "Robin", AvatarClass.ARCHER, 100, 100, 5);
 
             assertNotNull(archerPlayer);
             assertEquals("John", archerPlayer.getPlayerName());
             assertEquals("Robin", archerPlayer.getAvatarName());
             assertEquals(AvatarClass.ARCHER, archerPlayer.getAvatarClass());
             assertEquals(100, archerPlayer.getMoney());
-            assertEquals(notEmptyInventory, archerPlayer.getInventory());
             assertNotNull(archerPlayer.getAbilities());
 
-            Player adventurerPlayer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100, 200, notEmptyInventory);
+            Player adventurerPlayer = new Player("Alice", "Lara", AvatarClass.ADVENTURER, 100, 200, 5);
 
             assertNotNull(adventurerPlayer);
             assertEquals("Alice", adventurerPlayer.getPlayerName());
@@ -58,14 +50,14 @@ public class PlayerTest {
         @DisplayName("Impossible to create a player with an invalid avatarClass")
         void mustNotCreateAPlayerWithAnInvalidAvatarClass() {
             assertThrows(IllegalArgumentException.class, () -> {
-                new Player("Alice", "Alice the skeleton", AvatarClass.valueOf("InvalidAvatarClass"), 100, 100, notEmptyInventory);
+                new Player("Alice", "Alice the skeleton", AvatarClass.valueOf("InvalidAvatarClass"), 100, 100, 5);
             });
         }
 
         @Test
         @DisplayName("Constructeur avec argent à zéro")
         void testConstructorWithZeroMoney() {
-            Player p = new Player("Poor", "Avatar", AvatarClass.ARCHER, 100, 0, notEmptyInventory);
+            Player p = new Player("Poor", "Avatar", AvatarClass.ARCHER, 100, 0, 5);
 
             assertEquals(0, p.getMoney());
         }
@@ -75,15 +67,6 @@ public class PlayerTest {
         void testConstructorWithEmptyInventory() {
             assertNotNull(archer.getInventory());
             assertEquals(0, archer.getInventory().size());
-        }
-
-        @Test
-        @DisplayName("Constructeur avec inventaire non vide")
-        void testConstructorWithNotEmptyInventory() {
-            assertNotNull(dwarf.getInventory());
-            assertEquals(2, dwarf.getInventory().size());
-            assertEquals("Sword", dwarf.getInventory().get(0));
-            assertEquals("Potion", dwarf.getInventory().get(1));
         }
     }
 
@@ -106,7 +89,7 @@ public class PlayerTest {
         @Test
         @DisplayName("removeMoney - montant négatif provoque une exception")
         void testRemoveMoneyNegativeResult() {
-            Player p = new Player("John", "Avatar", AvatarClass.ARCHER, 100, 50, notEmptyInventory);
+            Player p = new Player("John", "Avatar", AvatarClass.ARCHER, 100, 50, 5);
 
             try {
                 p.removeMoney(100);
@@ -281,7 +264,6 @@ public class PlayerTest {
             archer.addXp(10);
 
             assertEquals(1, archer.getInventory().size());
-            assertNotNull(archer.getInventory().getFirst());
         }
 
         @Test
@@ -342,7 +324,7 @@ public class PlayerTest {
         @DisplayName("UpdateEndOfRound - ARCHER avec HP < 50% avec Magic Bow")
         void testUpdateEndOfRoundArcherLowHealthWithMagicBow() {
             archer.setCurrentHP(40);
-            archer.addObjectInventory("Magic Bow");
+            archer.addObjectInventory(Item.MAGIC_BOW);
 
             archer.updateEndOfRound();
 
@@ -364,7 +346,7 @@ public class PlayerTest {
         @DisplayName("UpdateEndOfRound - DWARF avec HP < 50% avec Holy Elixir")
         void testUpdateEndOfRoundDwarfLowHealthWithElixir() {
             dwarf.setCurrentHP(40);
-            dwarf.addObjectInventory("Holy Elixir");
+            dwarf.addObjectInventory(Item.HOLY_ELIXIR);
 
             dwarf.updateEndOfRound();
 
@@ -452,7 +434,7 @@ public class PlayerTest {
         @Test
         @DisplayName("UpdateEndOfRound - GOBLIN avec HP en dessous de 50%")
         void testUpdateEndOfRoundGoblinBelowHalfHealth() {
-            Player goblin = new Player("Martin", "Garnuff", AvatarClass.GOBLIN, 100, 50, new ArrayList<>());
+            Player goblin = new Player("Martin", "Garnuff", AvatarClass.GOBLIN, 100, 50,5);
             goblin.setCurrentHP(40);
 
             goblin.updateEndOfRound();

@@ -33,6 +33,10 @@ public class Inventory {
         return weight;
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
     /* ============== ITEM MANAGEMENT ============== */
 
     public void addItem(Item item) {
