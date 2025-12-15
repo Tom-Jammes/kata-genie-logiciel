@@ -1,21 +1,13 @@
 package re.forestier.edu.rpg;
 
 import re.forestier.edu.rpg.avatarclasses.AvatarClass;
+import re.forestier.edu.rpg.inventory.Inventory;
+import re.forestier.edu.rpg.inventory.Item;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Player {
-    private final static String[] objectList = {
-            "Lookout Ring : Prevents surprise attacks",
-            "Scroll of Stupidity : INT-2 when applied to an enemy",
-            "Draupnir : Increases XP gained by 100%",
-            "Magic Charm : Magic +10 for 5 rounds",
-            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
-            "Combat Edge : Well, that's an edge",
-            "Holy Elixir : Recover your HP"
-    };
     private final static int MAXIMUM_LEVEL = 5;
     private static final double HEALING_THRESHOLD = 0.5; // 50%
 
@@ -27,15 +19,15 @@ public class Player {
     private int currentHP;
     private int xp;
     private final HashMap<String, Integer> abilities;
-    private ArrayList<String> inventory;
+    private final Inventory inventory;
 
-    public Player(String playerName, String avatarName, AvatarClass avatarClass, int maxHP, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, AvatarClass avatarClass, int maxHP, int money, int maxInventoryWeight) {
         this.avatarClass = avatarClass;
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.money = money;
         this.maxHP = maxHP;
-        this.inventory = inventory;
+        this.inventory = new Inventory(maxInventoryWeight);
         this.abilities = this.avatarClass.getAbilitiesByLevel(1);
     }
 
@@ -92,14 +84,11 @@ public class Player {
     }
 
     /* ====================== INVENTORY ====================== */
-    public ArrayList<String> getInventory() {
+    public Inventory getInventory() {
         return inventory;
     }
-    public void setInventory(ArrayList<String> inventory) {
-        this.inventory = inventory;
-    }
-    public void addObjectInventory(String objectName) {
-        this.inventory.add(objectName);
+    public void addObjectInventory(Item item) {
+        this.inventory.addItem(item);
     }
 
     /* ====================== OTHER GETTERS ====================== */
@@ -127,8 +116,7 @@ public class Player {
     }
 
     private void levelUp() {
-        Random random = new Random();
-        this.addObjectInventory(objectList[random.nextInt(objectList.length)]);
+        this.addObjectInventory(Item.random());
 
         HashMap<String, Integer> newAbilities = this.avatarClass.getAbilitiesByLevel(retrieveLevel());
         this.abilities.putAll(newAbilities);

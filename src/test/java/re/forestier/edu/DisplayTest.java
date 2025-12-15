@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import re.forestier.edu.rpg.Display;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.avatarclasses.AvatarClass;
-
-import java.util.ArrayList;
+import re.forestier.edu.rpg.inventory.Item;
 
 import static org.approvaltests.Approvals.verify;
 
@@ -14,9 +13,9 @@ public class DisplayTest {
 
     @Test
     void testDisplayPlayerAsString() {
-        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, new ArrayList<>());
+        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, 5);
         player.addXp(20);
-        player.setInventory(new ArrayList<>());
+        player.getInventory().clear();
 
         verify(Display.displayPlayer(player));
     }
@@ -24,9 +23,9 @@ public class DisplayTest {
     @Test
     @DisplayName("Affichage en markdown du player avec inventaire vide")
     void testDisplayMarkdownPlayerEmptyInventory() {
-        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, new ArrayList<>());
+        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, 5);
         player.addXp(20);
-        player.setInventory(new ArrayList<>());
+        player.getInventory().clear();
 
         verify(Display.displayMarkdown(player));
     }
@@ -34,10 +33,10 @@ public class DisplayTest {
     @Test
     @DisplayName("Affichage en markdown du player avec inventaire non vide")
     void testDisplayMarkdownPlayerNotEmptyInventory() {
-        Player player = new Player("Tom", "Legolas", AvatarClass.ARCHER, 100, 200, new ArrayList<>());
+        Player player = new Player("Tom", "Legolas", AvatarClass.ARCHER, 100, 200, 5);
         player.addXp(20);
-        player.setInventory(new ArrayList<>());
-        player.addObjectInventory("Scroll of Stupidity");
+        player.getInventory().clear();
+        player.addObjectInventory(Item.SCROLL_OF_STUPIDITY);
 
         verify(Display.displayMarkdown(player));
     }
