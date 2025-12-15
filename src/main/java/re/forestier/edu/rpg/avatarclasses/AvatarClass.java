@@ -7,7 +7,8 @@ import java.util.HashMap;
 public enum AvatarClass {
     ARCHER(new Archer()),
     ADVENTURER(new Adventurer()),
-    DWARF(new Dwarf());
+    DWARF(new Dwarf()),
+    GOBLIN(new Goblin());
 
     private final AvatarClassAbstract avatarClass;
 
