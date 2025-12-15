@@ -19,11 +19,11 @@ public class Archer extends AvatarClassAbstract {
     protected HashMap<Integer, HashMap<String, Integer>> initializeAbilities() {
         HashMap<Integer, HashMap<String, Integer>> abilities = new HashMap<>();
 
-        abilities.put(1, abilities("INT", 1, "ATK", 3, "CHA", 1, "VIS", 3));
-        abilities.put(2, abilities("DEF", 1, "CHA", 2));
-        abilities.put(3, abilities("ATK", 3));
-        abilities.put(4, abilities("DEF", 2));
-        abilities.put(5, abilities("ATK", 4));
+        abilities.put(1, createAbilities("INT", 1, "ATK", 3, "CHA", 1, "VIS", 3));
+        abilities.put(2, createAbilities("DEF", 1, "CHA", 2));
+        abilities.put(3, createAbilities("ATK", 3));
+        abilities.put(4, createAbilities("DEF", 2));
+        abilities.put(5, createAbilities("ATK", 4));
 
         return abilities;
     }

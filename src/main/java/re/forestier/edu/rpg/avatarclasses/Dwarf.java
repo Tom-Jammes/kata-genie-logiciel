@@ -19,11 +19,11 @@ public class Dwarf extends AvatarClassAbstract {
     protected HashMap<Integer, HashMap<String, Integer>> initializeAbilities() {
         HashMap<Integer, HashMap<String, Integer>> abilities = new HashMap<>();
 
-        abilities.put(1, abilities("ALC", 4, "INT", 1, "ATK", 3));
-        abilities.put(2, abilities("DEF", 1, "ALC", 5));
-        abilities.put(3, abilities("ATK", 4));
-        abilities.put(4, abilities("DEF", 2));
-        abilities.put(5, abilities("CHA", 1));
+        abilities.put(1, createAbilities("ALC", 4, "INT", 1, "ATK", 3));
+        abilities.put(2, createAbilities("DEF", 1, "ALC", 5));
+        abilities.put(3, createAbilities("ATK", 4));
+        abilities.put(4, createAbilities("DEF", 2));
+        abilities.put(5, createAbilities("CHA", 1));
 
         return abilities;
     }

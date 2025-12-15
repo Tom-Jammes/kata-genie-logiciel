@@ -21,7 +21,7 @@ public abstract class AvatarClassAbstract {
     /**
      * Helper method to facilitate abilities initialization
      */
-    protected HashMap<String, Integer> abilities(Object... pairs) {
+    protected HashMap<String, Integer> createAbilities(Object... pairs) {
         HashMap<String, Integer> map = new HashMap<>();
         for (int i = 0; i < pairs.length; i += 2) {
             map.put((String) pairs[i], (Integer) pairs[i + 1]);
