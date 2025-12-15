@@ -16,22 +16,21 @@ class AdventurerTest {
         @DisplayName("Abilities - Adventurer level 1")
         void testAbilitiesAdventurerLevel1() {
             HashMap<String, Integer> abilities = AvatarClass.ADVENTURER.getAbilitiesByLevel(1);
-//                assertEquals(1, abilities.get("INT"));   IMPOSSIBLE DUE TO THE BUG
+            assertEquals(1, abilities.get("INT"));
             assertEquals(1, abilities.get("DEF"));
             assertEquals(3, abilities.get("ATK"));
-//                assertEquals(2, abilities.get("CHA"));  IMPOSSIBLE DUE TO THE BUG
+            assertEquals(2, abilities.get("CHA"));
             assertEquals(4, abilities.size());
         }
 
-//            IMPOSSIBLE DUE TO THE BUG
-//            @Test
-//            @DisplayName("Abilities - Adventurer level 2")
-//            void testAbilitiesAdventurerLevel2() {
-//                HashMap<String, Integer> abilities = AvatarClass.ADVENTURER.getAbilitiesByLevel(2);
-//                assertEquals(2, abilities.get("INT"));
-//                assertEquals(3, abilities.get("CHA"));
-//                assertEquals(2, abilities.size());
-//            }
+        @Test
+        @DisplayName("Abilities - Adventurer level 2")
+        void testAbilitiesAdventurerLevel2() {
+            HashMap<String, Integer> abilities = AvatarClass.ADVENTURER.getAbilitiesByLevel(2);
+            assertEquals(2, abilities.get("INT"));
+            assertEquals(3, abilities.get("CHA"));
+            assertEquals(2, abilities.size());
+        }
 
         @Test
         @DisplayName("Abilities - Adventurer level 3")
