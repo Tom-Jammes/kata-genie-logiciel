@@ -1,25 +1,22 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.Test;
-import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.UpdatePlayer;
-import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.Display;
+import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.avatarclasses.AvatarClass;
 
 import java.util.ArrayList;
 
 import static org.approvaltests.Approvals.verify;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class DisplayTest {
 
     @Test
-    void testAffichageBase() {
-        player player = new player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>());
-        UpdatePlayer.addXp(player, 20);
-        player.inventory = new ArrayList<>();
+    void testDisplayPlayerAsString() {
+        Player player = new Player("Florian", "Gnognak le Barbare", AvatarClass.ADVENTURER, 100, 200, new ArrayList<>());
+        player.addXp(20);
+        player.setInventory(new ArrayList<>());
 
-        verify(Affichage.afficherJoueur(player));
+        verify(Display.displayPlayer(player));
     }
 }
