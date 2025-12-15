@@ -1,0 +1,10 @@
+# Joueur Legolas joué par Tom *(ARCHER)*
+## Niveau : 2 (XP totale : 20)
+## Capacités :
+* ATK : 3
+* CHA : 2
+* DEF : 1
+* INT : 1
+* VIS : 3
+## Inventaire :
+* Scroll of Stupidity

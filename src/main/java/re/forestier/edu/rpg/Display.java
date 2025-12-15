@@ -40,4 +40,43 @@ public class Display {
 
         return display.toString();
     }
+
+    public static String displayMarkdown(Player player) {
+        StringBuilder display = new StringBuilder();
+
+        /* ====================== GLOBAL INFOS ====================== */
+        display.append("# ").append("Joueur ").append(player.getAvatarName())
+                .append(" joué par ").append(player.getPlayerName())
+                .append(" *(").append(player.getAvatarClass()).append(")*");
+        display.append("\n");
+
+        /* ====================== XP STATS ====================== */
+        display.append("## ").append("Niveau : ").append(player.retrieveLevel())
+                .append(" (XP totale : ").append(player.getXp()).append(")");
+        display.append("\n");
+
+        /* ====================== ABILITIES (sorted alphabetically) ====================== */
+        display.append("## ").append("Capacités :");
+        player.getAbilities().entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> {
+                    display.append("\n").append("* ")
+                            .append(entry.getKey()).append(" : ").append(entry.getValue());
+                });
+        display.append("\n");
+
+        /* ====================== INVENTORY (sorted alphabetically) ====================== */
+        display.append("## ").append("Inventaire :");
+        if (player.getInventory().isEmpty()) {
+            display.append("\n*(Aucun item)*");
+        } else {
+            player.getInventory().stream()
+                    .sorted()
+                    .forEach(name -> {
+                        display.append("\n").append("* ").append(name);
+                    });
+        }
+
+        return display.toString();
+    }
 }
